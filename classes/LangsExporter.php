@@ -27,7 +27,7 @@ class LangsExporter {
 	public function createZip() {
 		$dir = $this->createTempDir();
 		if (!$dir) {
-			throw new Exception("Error creating temp directory");
+			throw new \Exception("Error creating temp directory");
 		}
 		
 		$files = array();
@@ -42,7 +42,7 @@ class LangsExporter {
 		$zipPath = $dir.'/langs.zip';
 		
 		if ($zip->open($zipPath, \ZipArchive::CREATE) !== true) {
-			throw new Exception("Error creating zip file");
+			throw new \Exception("Error creating zip file");
 		}
 		
 		foreach ($files as $file) {
