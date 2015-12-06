@@ -2,7 +2,6 @@
 
 namespace langs\controllers;
 
-use JNMFW\helpers\HServer;
 use langs\models\TextModel;
 
 class TextController extends \JNMFW\BaseController {
@@ -19,7 +18,7 @@ class TextController extends \JNMFW\BaseController {
 	public function get() {
 		$id_key = $this->request->getUInt('id_key');
 		$data = $this->textModel->getByIdKey($id_key);
-		HServer::sendData($data);
+		$this->server->sendData($data);
 	}
 	
 	public function save() {
@@ -29,7 +28,7 @@ class TextController extends \JNMFW\BaseController {
 		
 		$this->textModel->save($id_lang, $id_key, $text);
 		
-		HServer::sendOK();
+		$this->server->sendOK();
 	}
 	
 	public function delete() {
@@ -38,6 +37,6 @@ class TextController extends \JNMFW\BaseController {
 		
 		$this->textModel->delete($id_lang, $id_key);
 		
-		HServer::sendOK();
+		$this->server->sendOK();
 	}
 }

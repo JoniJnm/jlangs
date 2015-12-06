@@ -2,7 +2,6 @@
 
 namespace langs\controllers;
 
-use JNMFW\helpers\HServer;
 use langs\models\BundleModel;
 use langs\tables\BundleTable;
 
@@ -19,7 +18,7 @@ class BundleController extends \JNMFW\BaseController {
 	
 	public function get() {
 		$data = $this->bundleModel->getAll();
-		HServer::sendData($data);
+		$this->server->sendData($data);
 	}
 	
 	public function add() {
@@ -29,12 +28,12 @@ class BundleController extends \JNMFW\BaseController {
 		$item->name = $name;
 		$item->insert();
 		
-		HServer::sendData($item->id);
+		$this->server->sendData($item->id);
 	}
 	
 	public function delete() {
 		$id_bundle = $this->request->getUInt('id_bundle');
 		$this->bundleModel->delete($id_bundle);
-		HServer::sendOK();
+		$this->server->sendOK();
 	}
 }

@@ -2,7 +2,6 @@
 
 namespace langs\controllers;
 
-use JNMFW\helpers\HServer;
 use langs\models\KeyModel;
 use langs\tables\KeyTable;
 
@@ -20,7 +19,7 @@ class KeyController extends \JNMFW\BaseController {
 	public function get() {
 		$id_bundle = $this->request->getUInt('id_bundle');
 		$data = $this->keyModel->getByIdBundle($id_bundle);
-		HServer::sendData($data);
+		$this->server->sendData($data);
 	}
 	
 	public function add() {
@@ -32,12 +31,12 @@ class KeyController extends \JNMFW\BaseController {
 		$item->name = $name;
 		$item->insert();
 		
-		HServer::sendData($item->id);
+		$this->server->sendData($item->id);
 	}
 	
 	public function delete() {
 		$id_key = $this->request->getUInt('id_key');
 		$this->keyModel->delete($id_key);
-		HServer::sendOK();
+		$this->server->sendOK();
 	}
 }
