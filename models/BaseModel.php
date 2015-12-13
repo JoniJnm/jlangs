@@ -2,12 +2,12 @@
 
 namespace langs\models;
 
-abstract class BaseModel extends \JNMFW\BaseModel {
+abstract class BaseModel extends \JNMFW\ModelBase {
 	protected function getObjByID($id, $name) {
-		return parent::getByPrimaryKey($id, "Tienda\\tables\\".$name."Table", "Tienda\\objs\\".$name);
+		return parent::getByPrimaryKey($id, "langs\\tables\\".$name."Table", "langs\\objs\\".$name);
 	}
 	
 	protected function getObjsByIDs($ids, $name) {
-		return parent::getMultiByPrimaryKey($ids, "Tienda\\tables\\".$name."Table", "Tienda\\objs\\".$name);
+		return parent::getMultiByPrimaryKey($ids, "langs\\tables\\".$name."Table", "langs\\objs\\".$name);
 	}
 }

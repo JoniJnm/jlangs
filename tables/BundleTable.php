@@ -4,7 +4,7 @@ namespace langs\tables;
 
 use langs\Config;
 
-class BundleTable extends \JNMFW\BaseTable {
+class BundleTable extends \JNMFW\TableBase {
 	public $id;
 	public $name;
 	

@@ -4,7 +4,7 @@ namespace langs\objs;
 
 use langs\tables\TextTable;
 
-class Key extends \JNMFW\BaseObj {
+class Key extends \JNMFW\ObjBase {
 	/**
 	 * @return TextTable
 	 */

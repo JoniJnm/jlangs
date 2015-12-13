@@ -4,7 +4,7 @@ namespace langs\tables;
 
 use langs\Config;
 
-class LangTable extends \JNMFW\BaseTable {
+class LangTable extends \JNMFW\TableBase {
 	public $id;
 	public $code;
 	

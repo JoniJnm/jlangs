@@ -5,7 +5,7 @@ namespace langs\controllers;
 use langs\models\KeyModel;
 use langs\tables\KeyTable;
 
-class KeyController extends \JNMFW\BaseController {
+class KeyController extends \JNMFW\ControllerBase {
 	/**
 	 * @var KeyModel
 	 */

@@ -5,7 +5,7 @@ namespace langs\controllers;
 use langs\models\BundleModel;
 use langs\tables\BundleTable;
 
-class BundleController extends \JNMFW\BaseController {
+class BundleController extends \JNMFW\ControllerBase {
 	/**
 	 * @var BundleModel
 	 */

@@ -4,7 +4,7 @@ namespace langs\objs;
 
 use langs\tables\BundleTable;
 
-class Bundle extends \JNMFW\BaseObj {
+class Bundle extends \JNMFW\ObjBase {
 	/**
 	 * @return BundleTable
 	 */

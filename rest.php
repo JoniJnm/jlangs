@@ -10,9 +10,6 @@ error_reporting(E_ALL);
 
 header('Access-Control-Allow-Origin: *');
 
-$jnmfw = dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'jnmfw';
-set_include_path(get_include_path() . PATH_SEPARATOR . dirname($jnmfw));
-
 require(__DIR__.'/includes/init.php');
 
 register_shutdown_function(function() {

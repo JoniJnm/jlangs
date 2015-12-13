@@ -4,7 +4,7 @@ namespace langs\tables;
 
 use langs\Config;
 
-class KeyTable extends \JNMFW\BaseTable {
+class KeyTable extends \JNMFW\TableBase {
 	public $id_bundle;
 	public $name;
 	

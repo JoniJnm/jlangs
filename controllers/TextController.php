@@ -4,7 +4,7 @@ namespace langs\controllers;
 
 use langs\models\TextModel;
 
-class TextController extends \JNMFW\BaseController {
+class TextController extends \JNMFW\ControllerBase {
 	/**
 	 * @var TextModel
 	 */

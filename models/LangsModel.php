@@ -4,7 +4,7 @@ namespace langs\models;
 
 use langs\Config;
 
-class LangsModel extends \JNMFW\SimpleModel {
+class LangsModel extends \JNMFW\ModelSimple {
 	public function getTexts($id_lang) {
 		$data = $this->db->getQueryBuilderSelect(Config::TABLE_VALUES, 'v')
 				->innerJoin(Config::TABLE_KEYS, 'k', 'v.id_key', 'k.id')

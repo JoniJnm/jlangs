@@ -6,7 +6,7 @@ use langs\models\LangModel;
 use langs\models\LangsModel;
 use langs\classes\LangsExporter;
 
-class ExportController extends \JNMFW\BaseController {
+class ExportController extends \JNMFW\ControllerBase {
 	/**
 	 * @var LangModel
 	 */
