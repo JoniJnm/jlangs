@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/JoniJnm/langs/issues"
   },
-  "homepage": "https://github.com/JoniJnm/langs#readme"
+  "homepage": "https://github.com/JoniJnm/langs#readme",
+  "devDependencies": {
+    "less": "^2.5.3"
+  }
 }
