@@ -21,7 +21,7 @@
 		var self = this;
 
 		this.$btnDelete.click(function() {
-			var id_key = self.$select.val();
+			var id_key = parseInt(self.$select.val());
 			self.onDelete.trigger(id_key);
 		});
 		this.$formAdd.submit(function(event) {
