@@ -35,7 +35,7 @@
 
 	View.prototype = {
 		add: function(value, text) {
-			var html = this.tplOption({
+			var html = this.tplOption.rende({
 				value: value,
 				text: text
 			});

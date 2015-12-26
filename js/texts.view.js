@@ -36,7 +36,7 @@
 
 	View.prototype = {
 		refresh: function(langs) {
-			var html = this.tplLang(langs);
+			var html = this.tplLang.rende(langs);
 			this.$langs.html(html);
 		},
 		clear: function() {

@@ -1,0 +1,24 @@
+{
+  "name": "langs",
+  "version": "1.0.0",
+  "description": "Simple Language Manager",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://JoniJnm@github.com/JoniJnm/langs.git"
+  },
+  "keywords": [
+    "lang",
+    "manager",
+    "php"
+  ],
+  "author": "JoniJnm",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/JoniJnm/langs/issues"
+  },
+  "homepage": "https://github.com/JoniJnm/langs#readme"
+}

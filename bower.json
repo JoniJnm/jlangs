@@ -1,0 +1,32 @@
+{
+  "name": "langs",
+  "description": "Simple Language Manager",
+  "main": "index.php",
+  "authors": [
+    "JoniJnm"
+  ],
+  "license": "GPL-2.0",
+  "keywords": [
+    "lang",
+    "manager",
+    "php"
+  ],
+  "homepage": "https://github.com/JoniJnm/langs",
+  "moduleType": [
+    "amd"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "jquery": "~2.1.4",
+    "jstemplate": "~1.3.1",
+    "underscore": "~1.8.3"
+  }
+}
