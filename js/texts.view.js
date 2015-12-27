@@ -4,7 +4,9 @@
 	'use strict';
 
 	var View = function() {
-		this.$langs = $('#langs');
+		this.$root = $('#langs');
+		this.$langs = this.$root.find('.list');
+		this.$saveAllBtn = this.$root.find('.save-all');
 
 		this.onReady = new Event(true);
 		this.onSave = new Event();
@@ -31,6 +33,12 @@
 		this.$langs.on('keyup', '.text', function() {
 			var $elm = $(this);
 			$elm.addClass('unsaved');
+		});
+		
+		this.$saveAllBtn.click(function() {
+			$('.translation .save', this.$langs).each(function() {
+				$(this).click();
+			});
 		});
 	};
 

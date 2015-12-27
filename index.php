@@ -10,9 +10,7 @@
 		<div class="container" role="main">
 			<?php require('tpls/top.php') ?>
 			
-			<div id="langs">
-				
-			</div>
+			<?php require('tpls/langs.php') ?>
 		</div>
 
 		<?php require('tpls/footer.php') ?>

@@ -7,8 +7,8 @@
 					<input required class="text form-control" type="text" value="{lang.text || ''}" />
 				</div>
 				<div class="col-md-3">
-					<button class="btn btn-success">Save</button>
-					<button type="button" class="delete btn btn-danger">Delete</button>
+					<button tabindex="-1" class="save btn btn-success">Save</button>
+					<button tabindex="-1" type="button" class="delete btn btn-danger">Delete</button>
 				</div>
 			</form>
 		</div>
