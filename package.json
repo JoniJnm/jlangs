@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/JoniJnm/langs#readme",
   "devDependencies": {
+    "clean-css": "^3.4.8",
     "less": "^2.5.3"
   }
 }
