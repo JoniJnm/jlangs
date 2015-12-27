@@ -62,7 +62,7 @@ class LangsExporter {
 				$data = $this->langsModel->getTexts($lang->id);
 				$content = "<?php\n\n";
 				if ($namespace) $content .= "namespace ".$namespace.";\n\n";
-				$content .= "class Lang{$code} {\n";
+				$content .= "abstract class Lang{$code} {\n";
 				foreach ($data as $bundle => $_data) {
 					foreach ($_data as $key => $text) {
 						$k = $bundle."_".$key;
@@ -80,7 +80,7 @@ class LangsExporter {
 			$file = $dir."/Lang.php";
 			$content = "<?php\n\n";
 			if ($namespace) $content .= "namespace ".$namespace.";\n\n";
-			$content .= "class Lang {\n";
+			$content .= "abstract class Lang {\n";
 			foreach ($keys as $key) {
 				$content .= "\tconst $key = '{$key}';\n";
 			}
