@@ -7,7 +7,7 @@
 
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 
-	<link rel="stylesheet" href="css/app.css" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/app.css">
 
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
