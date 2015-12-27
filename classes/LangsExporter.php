@@ -56,6 +56,7 @@ class LangsExporter {
 		return $this->createZip(function($dir) use ($namespace) {
 			$files = array();
 			$keys = array();
+			$microtime = microtime(true);
 			foreach ($this->langs as $lang) {
 				$code = strtoupper($lang->code);
 				$file = $dir."/Lang{$code}.php";
@@ -63,6 +64,7 @@ class LangsExporter {
 				$content = "<?php\n\n";
 				if ($namespace) $content .= "namespace ".$namespace.";\n\n";
 				$content .= "abstract class Lang{$code} {\n";
+				$content .= "\tconst _VERSION = ".$microtime.";\n";
 				foreach ($data as $bundle => $_data) {
 					foreach ($_data as $key => $text) {
 						$k = $bundle."_".$key;
