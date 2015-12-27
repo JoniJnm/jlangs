@@ -39,6 +39,18 @@ class ExportController extends \JNMFW\ControllerBase {
 		$this->end($zipPath);
 	}
 	
+	public function php_class() {
+		$langs = $this->langModel->getAll();
+		$namespace = null;
+		if (!$this->request->is_empty("namespace")) {
+			$namespace = $this->request->getRegex("[a-z\\\\]+", "namespace");
+		}
+		$exporter = new LangsExporter($langs);
+		$zipPath = $exporter->toPHPClass($namespace);
+		
+		$this->end($zipPath);
+	}
+	
 	private function end($zipPath) {
 		header('Content-Description: File Transfer');
 		header('Content-Type: application/zip');

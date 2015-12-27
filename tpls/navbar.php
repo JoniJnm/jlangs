@@ -10,8 +10,9 @@
 						Export <span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="/rest/export/json">JSON</a></li>
-						<li><a href="/rest/export/php_array">PHP Array</a></li>
+						<li><a class="export" data-type="json" href="javascript:void(0)">JSON</a></li>
+						<li><a class="export" data-type="php_array" href="javascript:void(0)">PHP Array</a></li>
+						<li><a class="export" data-type="php_class" href="javascript:void(0)">PHP Class</a></li>
 					</ul>
 				</li>
 			</ul>

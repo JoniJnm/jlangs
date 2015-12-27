@@ -9,4 +9,19 @@ $(document).ready(function() {
 		var bundles = new app.models.Bundles(keys);
 		bundles.refresh();
 	});
+	
+	$('#navbar .export').click(function() {
+		var type = $(this).data('type');
+		if (type === 'php_class') {
+			var url = "rest/export/"+type;
+			var namespace = prompt("namespace (optional)");
+			if (namespace) {
+				url += '?namespace='+encodeURIComponent(namespace);
+			}
+			location.href = url;
+		}
+		else {
+			location.href = "rest/export/"+type;
+		}
+	});
 });

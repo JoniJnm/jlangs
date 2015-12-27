@@ -25,16 +25,68 @@ class LangsExporter {
 	}
 	
 	public function toJSON() {
-		return $this->createZip(function($lang, $data) {
-			$name = "{$lang->code}.json";
-			return array($name, json_encode($data));
+		return $this->createZip(function($dir) {
+			$files = array();
+			foreach ($this->langs as $lang) {
+				$file = $dir."/{$lang->code}.json";
+				$data = $this->langsModel->getTexts($lang->id);
+				file_put_contents($file, json_encode($data));
+				$files[] = $file;
+			}
+			return $files;
 		});
 	}
 	
 	public function toPHPArray() {
-		return $this->createZip(function($lang, $data) {
-			$name = "{$lang->code}.php";
-			return array($name, "<?php\n\$_LANG = ".var_export($data, true).";");
+		return $this->createZip(function($dir) {
+			$files = array();
+			foreach ($this->langs as $lang) {
+				$file = $dir."/{$lang->code}.php";
+				$data = $this->langsModel->getTexts($lang->id);
+				$content = "<?php\n\$_LANG = ".var_export($data, true).";";
+				file_put_contents($file, $content);
+				$files[] = $file;
+			}
+			return $files;
+		});
+	}
+	
+	public function toPHPClass($namespace) {
+		return $this->createZip(function($dir) use ($namespace) {
+			$files = array();
+			$keys = array();
+			foreach ($this->langs as $lang) {
+				$code = strtoupper($lang->code);
+				$file = $dir."/Lang{$code}.php";
+				$data = $this->langsModel->getTexts($lang->id);
+				$content = "<?php\n\n";
+				if ($namespace) $content .= "namespace ".$namespace.";\n\n";
+				$content .= "class Lang{$code} {\n";
+				foreach ($data as $bundle => $_data) {
+					foreach ($_data as $key => $text) {
+						$k = $bundle."_".$key;
+						$content .= "\tconst $k = '".addslashes($text)."';\n";
+					}
+				}
+				$keys = array_merge($keys, array_keys($_data));
+				$content .= "}";
+				
+				file_put_contents($file, $content);
+				$files[] = $file;
+			}
+			
+			$file = $dir."/Lang.php";
+			$content = "<?php\n\n";
+			if ($namespace) $content .= "namespace ".$namespace.";\n\n";
+			$content .= "class Lang {\n";
+			foreach ($keys as $key) {
+				$content .= "\tconst $key = '{$key}';\n";
+			}
+			$content .= "}";
+			file_put_contents($file, $content);
+			$files[] = $file;
+			
+			return $files;
 		});
 	}
 	
@@ -44,14 +96,7 @@ class LangsExporter {
 			throw new \Exception("Error creating temp directory");
 		}
 		
-		$files = array();
-		foreach ($this->langs as $lang) {
-			$data = $this->langsModel->getTexts($lang->id);
-			list($filename, $content) = $func($lang, $data);
-			$file = $dir."/".$filename;
-			file_put_contents($file, $content);
-			$files[] = $file;
-		}
+		$files = $func($dir);
 		
 		$zip = new \ZipArchive();
 		$zipPath = $dir.'/langs.zip';
