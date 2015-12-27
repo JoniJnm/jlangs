@@ -8,11 +8,11 @@ class LangTable extends \JNMFW\TableBase {
 	public $id;
 	public $code;
 	
-	protected function getPrimaryKey() {
+	public function getPrimaryKey() {
 		return 'id';
 	}
 
-	protected function getTableName() {
+	public function getTableName() {
 		return Config::TABLE_LANGS;
 	}
 }

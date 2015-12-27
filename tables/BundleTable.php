@@ -8,11 +8,11 @@ class BundleTable extends \JNMFW\TableBase {
 	public $id;
 	public $name;
 	
-	protected function getPrimaryKey() {
+	public function getPrimaryKey() {
 		return 'id';
 	}
 
-	protected function getTableName() {
+	public function getTableName() {
 		return Config::TABLE_BUNDLES;
 	}
 }

@@ -9,11 +9,11 @@ class TextTable extends \JNMFW\TableBase {
 	public $id_key;
 	public $value;
 	
-	protected function getPrimaryKey() {
+	public function getPrimaryKey() {
 		return null;
 	}
 
-	protected function getTableName() {
+	public function getTableName() {
 		return Config::TABLE_KEYS;
 	}
 }

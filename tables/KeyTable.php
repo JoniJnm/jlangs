@@ -8,11 +8,11 @@ class KeyTable extends \JNMFW\TableBase {
 	public $id_bundle;
 	public $name;
 	
-	protected function getPrimaryKey() {
+	public function getPrimaryKey() {
 		return 'id';
 	}
 
-	protected function getTableName() {
+	public function getTableName() {
 		return Config::TABLE_KEYS;
 	}
 }
