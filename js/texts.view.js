@@ -46,8 +46,10 @@
 		refresh: function(langs) {
 			var html = this.tplLang.rende(langs);
 			this.$langs.html(html);
+			this.$root.removeClass('hidden');
 		},
 		clear: function() {
+			this.$root.addClass('hidden');
 			this.$langs.html('');
 		},
 		clearLang: function(id_lang) {

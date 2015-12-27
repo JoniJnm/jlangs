@@ -34,12 +34,15 @@
 	};
 
 	View.prototype = {
-		add: function(value, text) {
+		add: function(value, text, select) {
 			var html = this.tplOption.rende({
 				value: value,
 				text: text
 			});
 			this.$select.append(html);
+			if (select) {
+				this.$select.val(value).change();
+			}
 		},
 		refreshList: function(list) {
 			this.clearList();
@@ -54,6 +57,9 @@
 		clearList: function() {
 			this.$select.html('');
 			this.add(0, '');
+		},
+		clearAdder: function() {
+			this.$name.val('');
 		},
 		remove: function(id_bundle) {
 			this.setEmptyVal();

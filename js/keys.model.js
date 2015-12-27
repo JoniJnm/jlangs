@@ -40,7 +40,8 @@
 				id_bundle: this.id_bundle,
 				name: name
 			}, function(id_key) {
-				self.view.add(id_key, name);
+				self.view.add(id_key, name, true);
+				self.view.clearAdder();
 			});
 		},
 		clear: function() {

@@ -1,4 +1,4 @@
-<div id="langs">
+<div id="langs" class="hidden">
 	<div class="list">
 
 	</div>

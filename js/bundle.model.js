@@ -24,7 +24,8 @@
 			$.post('rest/bundle/add', {
 				name: name
 			}).done(function(id_bundle) {
-				self.view.add(id_bundle, name);
+				self.view.add(id_bundle, name, true);
+				self.view.clearAdder();
 			});
 		},
 		remove: function(id_bundle) {
