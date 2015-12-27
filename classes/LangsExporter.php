@@ -66,15 +66,16 @@ class LangsExporter {
 				foreach ($data as $bundle => $_data) {
 					foreach ($_data as $key => $text) {
 						$k = $bundle."_".$key;
+						$keys[] = $k;
 						$content .= "\tconst $k = '".addslashes($text)."';\n";
 					}
 				}
-				$keys = array_merge($keys, array_keys($_data));
 				$content .= "}";
 				
 				file_put_contents($file, $content);
 				$files[] = $file;
 			}
+			$keys = array_unique($keys);
 			
 			$file = $dir."/Lang.php";
 			$content = "<?php\n\n";
