@@ -23,11 +23,23 @@ class ExportController extends \JNMFW\ControllerBase {
 		$this->langsModel = LangsModel::getInstance();
 	}
 	
-	public function getAll() {
+	public function json() {
 		$langs = $this->langModel->getAll();
 		$exporter = new LangsExporter($langs);
-		$zipPath = $exporter->createZip();
+		$zipPath = $exporter->toJSON();
 		
+		$this->end($zipPath);
+	}
+	
+	public function php_array() {
+		$langs = $this->langModel->getAll();
+		$exporter = new LangsExporter($langs);
+		$zipPath = $exporter->toPHPArray();
+		
+		$this->end($zipPath);
+	}
+	
+	private function end($zipPath) {
 		header('Content-Description: File Transfer');
 		header('Content-Type: application/zip');
 		header('Content-Disposition: attachment; filename="langs.zip"');

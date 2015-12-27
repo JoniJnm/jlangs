@@ -24,7 +24,21 @@ class LangsExporter {
 		$this->langsModel = LangsModel::getInstance();
 	}
 	
-	public function createZip() {
+	public function toJSON() {
+		return $this->createZip(function($lang, $data) {
+			$name = "{$lang->code}.json";
+			return array($name, json_encode($data));
+		});
+	}
+	
+	public function toPHPArray() {
+		return $this->createZip(function($lang, $data) {
+			$name = "{$lang->code}.php";
+			return array($name, "<?php\n\$_LANG = ".var_export($data, true).";");
+		});
+	}
+	
+	public function createZip($func) {
 		$dir = $this->createTempDir();
 		if (!$dir) {
 			throw new \Exception("Error creating temp directory");
@@ -33,8 +47,9 @@ class LangsExporter {
 		$files = array();
 		foreach ($this->langs as $lang) {
 			$data = $this->langsModel->getTexts($lang->id);
-			$file = $dir."/{$lang->code}.json";
-			file_put_contents($file, json_encode($data));
+			list($filename, $content) = $func($lang, $data);
+			$file = $dir."/".$filename;
+			file_put_contents($file, $content);
 			$files[] = $file;
 		}
 		

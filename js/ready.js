@@ -9,8 +9,4 @@ $(document).ready(function() {
 		var bundles = new app.models.Bundles(keys);
 		bundles.refresh();
 	});
-	
-	$('#navbar .export').click(function() {
-		location.href = 'rest/export/getAll';
-	});
 });

@@ -8,7 +8,7 @@
 				</div>
 				<div class="col-md-3">
 					<button tabindex="-1" class="save btn btn-success">Save</button>
-					<button tabindex="-1" type="button" class="delete btn btn-danger">Delete</button>
+					<button tabindex="-1" type="button" class="delete btn btn-danger">Clear</button>
 				</div>
 			</form>
 		</div>
