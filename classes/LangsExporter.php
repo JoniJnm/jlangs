@@ -4,6 +4,7 @@ namespace langs\classes;
 
 use langs\tables\LangTable;
 use langs\models\LangsModel;
+use langs\Config;
 
 class LangsExporter {
 	/**
@@ -90,6 +91,14 @@ class LangsExporter {
 		});
 	}
 	
+	public function toMySQL() {
+		$file = $this->getTempFile();
+		$exec = "mysqldump -u".Config::DB_USER.' -p"'.Config::DB_PASSWORD.'"';
+		$exec .= " ".Config::DB_NAME." > '".$file."'";
+		exec($exec);
+		return $file;
+	}
+	
 	public function createZip($func) {
 		$dir = $this->createTempDir();
 		if (!$dir) {
@@ -99,7 +108,7 @@ class LangsExporter {
 		$files = $func($dir);
 		
 		$zip = new \ZipArchive();
-		$zipPath = $dir.'/langs.zip';
+		$zipPath = $this->getTempFile();
 		
 		if ($zip->open($zipPath, \ZipArchive::CREATE) !== true) {
 			throw new \Exception("Error creating zip file");
@@ -110,18 +119,34 @@ class LangsExporter {
 		}
 		$zip->close();
 		
+		$this->deleteDir($dir);
+		
 		return $zipPath;
 	}
 	
 	private function createTempDir() {
-		$tempfile = tempnam(sys_get_temp_dir(), '');
-		if (file_exists($tempfile)) { 
-			unlink($tempfile);
-			mkdir($tempfile);
-			if (is_dir($tempfile)) {
-				return $tempfile;
-			}
+		$folder = sys_get_temp_dir()."/pos_".microtime(true)."-".rand();
+		mkdir($folder);
+		if (is_dir($folder)) {
+			return $folder;
 		}
-		return null;
+		else {
+			return null;
+		}
+	}
+	
+	private function getTempFile() {
+		return sys_get_temp_dir()."/pos_".microtime(true)."-".rand();
+	}
+	
+	private function deleteDir($path) {
+		if (is_file($path)) {
+			unlink($path);
+		}
+		else {
+			$func = array($this, __FUNCTION__);
+			array_map($func, glob($path.'/*'));
+			rmdir($path);
+		}
 	}
 }
