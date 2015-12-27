@@ -24,7 +24,7 @@ class TextController extends \JNMFW\ControllerBase {
 	public function save() {
 		$id_lang = $this->request->getUInt('id_lang');
 		$id_key = $this->request->getUInt('id_key');
-		$text = $this->request->getCmd('text');
+		$text = $this->request->getString('text');
 		
 		$this->textModel->save($id_lang, $id_key, $text);
 		
