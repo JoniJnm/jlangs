@@ -8,7 +8,7 @@ Require:
 
 * https://github.com/JoniJnm/JNMFW
 * PHP 5.4+
-* MySQL 5.1+
+* MySQL 5.5+
 
 Usage:
 
