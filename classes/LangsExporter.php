@@ -70,7 +70,7 @@ class LangsExporter {
 						$k = $bundle."_".$key;
 						$k = str_replace('.', '_', $k);
 						$keys[] = $k;
-						$content .= "\tconst $k = '".addslashes($text)."';\n";
+						$content .= "\tconst $k = ".var_export($text, true).";\n";
 					}
 				}
 				$content .= "}";
