@@ -9,8 +9,8 @@
 				<label class="col-sm-1 control-label">{lang.lang_code}</label>
 				<div class="col-md-8">
 					{if useTextarea}
-						<input required class="text disabled form-control" type="text" value="" />
-						<textarea class="text enabled form-control">{lang.text || ''}</textarea>
+						<input class="text disabled form-control" type="text" value="" />
+						<textarea required class="text enabled form-control">{lang.text || ''}</textarea>
 					{else}
 						<input required class="text enabled form-control" type="text" value="{lang.text || ''}" />
 						<textarea class="text disabled form-control"></textarea>
