@@ -68,6 +68,7 @@ class LangsExporter {
 				foreach ($data as $bundle => $_data) {
 					foreach ($_data as $key => $text) {
 						$k = $bundle."_".$key;
+						$k = str_replace('.', '_', $k);
 						$keys[] = $k;
 						$content .= "\tconst $k = '".addslashes($text)."';\n";
 					}
