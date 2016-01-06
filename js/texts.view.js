@@ -7,6 +7,7 @@
 		this.$root = $('#langs');
 		this.$langs = this.$root.find('.list');
 		this.$saveAllBtn = this.$root.find('.save-all');
+		this.$toggleInputs = this.$root.find('.toggle-inputs');
 
 		this.onReady = new Event(true);
 		this.onSave = new Event();
@@ -22,7 +23,7 @@
 			event.preventDefault();
 			var $parent = $(this).closest('.translation');
 			var id_lang = $parent.data('id-lang');
-			var text = $parent.find('.text').val();
+			var text = $parent.find('.text.enabled').val();
 			self.onSave.trigger(id_lang, text);
 		});
 		this.$langs.on('click', '.delete', function() {
@@ -39,6 +40,9 @@
 			$('.translation .save', this.$langs).each(function() {
 				$(this).click();
 			});
+		});
+		this.$toggleInputs.click(function() {
+			self.toggleInputs();
 		});
 	};
 
@@ -58,6 +62,22 @@
 		},
 		langSaved: function(id_lang) {
 			this.$langs.find('.translation[data-id-lang="'+id_lang+'"] .text').removeClass('unsaved');
+		},
+		toggleInputs: function() {
+			$('.translation', this.$langs).each(function() {
+				var $inputVisible = $('.text.enabled', this);
+				var $inputHidden = $('.text.disabled', this);
+				var value = $inputVisible.val();
+				$inputVisible
+					.prop('required', false)
+					.addClass('disabled')
+					.removeClass('enabled');
+				$inputHidden
+					.prop('required', true)
+					.val(value)
+					.addClass('enabled')
+					.removeClass('disabled');
+			});
 		}
 	};
 
