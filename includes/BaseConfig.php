@@ -14,4 +14,5 @@ abstract class BaseConfig {
 	const TABLE_KEYS = '#__keys';
 	const TABLE_LANGS = '#__langs';
 	const TABLE_VALUES = '#__values';
+	const TABLE_PROJECTS = '#__projects';
 }

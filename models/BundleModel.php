@@ -24,8 +24,9 @@ class BundleModel extends BaseModel {
 	/**
 	 * @return BundleTable[]
 	 */
-	public function getAll() {
+	public function getByIdProject($id_project) {
 		return $this->db->getQueryBuilderSelect(Config::TABLE_BUNDLES)
+			->where('id_project', $id_project)
 			->loadObjectList();
 	}
 	

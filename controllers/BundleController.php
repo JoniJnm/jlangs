@@ -17,14 +17,17 @@ class BundleController extends \JNMFW\ControllerBase {
 	}
 	
 	public function get() {
-		$data = $this->bundleModel->getAll();
+		$id_project = $this->request->getUInt('id_project');
+		$data = $this->bundleModel->getByIdProject($id_project);
 		$this->server->sendData($data);
 	}
 	
 	public function add() {
+		$id_project = $this->request->getUInt('id_project');
 		$name = $this->request->getCmd('name');
 		
 		$item = new BundleTable();
+		$item->id_project = $id_project;
 		$item->name = $name;
 		$item->insert();
 		

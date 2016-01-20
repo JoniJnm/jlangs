@@ -4,11 +4,11 @@
 	'use strict';
 
 	var View = function() {
-		this.$filter = $('#filter-bundle');
+		this.$filter = $('#filter-project');
 		this.$select = this.$filter.find('select');
 		this.$btnDelete = this.$filter.find('.delete');
 
-		this.$adder = $('#add-bundle');
+		this.$adder = $('#add-project');
 		this.$formAdd = this.$adder.find('form');
 		this.$name = this.$formAdd.find('input');
 
@@ -21,8 +21,8 @@
 		var self = this;
 
 		this.$btnDelete.click(function() {
-			var id_bundle = parseInt(self.$select.val());
-			self.onDelete.trigger(id_bundle);
+			var id_project = parseInt(self.$select.val());
+			self.onDelete.trigger(id_project);
 		});
 		this.$formAdd.submit(function(event) {
 			event.preventDefault();
@@ -61,9 +61,9 @@
 		clearAdder: function() {
 			this.$name.val('');
 		},
-		remove: function(id_bundle) {
+		remove: function(id_project) {
 			this.setEmptyVal();
-			this.$select.find('option[value="'+id_bundle+'"]').remove();
+			this.$select.find('option[value="'+id_project+'"]').remove();
 		},
 		setEmptyVal: function() {
 			this.$select.val(0);
@@ -74,14 +74,8 @@
 		},
 		hideDelete: function() {
 			this.$btnDelete.hide();
-		},
-		showAdder: function() {
-			this.$adder.show();
-		},
-		hideAdder: function() {
-			this.$adder.hide();
 		}
 	};
 
-	app.views.Bundles = View;
+	app.views.Projects = View;
 })();

@@ -4,6 +4,7 @@
 	'use strict';
 	
 	var Model = function(keys) {
+		this.id_project = 0;
 		this.keys = keys;
 		this.view = new app.views.Bundles();
 		
@@ -13,20 +14,33 @@
 	};
 	
 	Model.prototype = {
-		refresh: function() {
+		refresh: function(id_project) {
+			this.id_project = id_project;
+			
 			var self = this;
-			$.get('rest/bundle/get', function(list) {
+			$.get('rest/bundle/get', {
+				id_project: id_project
+			}, function(list) {
+				self.keys.clear();
 				self.view.refreshList(list);
+				self.view.showAdder();
 			});
 		},
 		add: function(name) {
 			var self = this;
 			$.post('rest/bundle/add', {
+				id_project: this.id_project,
 				name: name
 			}).done(function(id_bundle) {
 				self.view.add(id_bundle, name, true);
 				self.view.clearAdder();
 			});
+		},
+		clear: function() {
+			this.view.clearList();
+			this.view.hideAdder();
+			this.view.hideDelete();
+			this.keys.clear();
 		},
 		remove: function(id_bundle) {
 			var self = this;

@@ -4,9 +4,9 @@ namespace langs\tables;
 
 use langs\Config;
 
-class LangTable extends \JNMFW\TableBase {
+class ProjectTable extends \JNMFW\TableBase {
 	public $id;
-	public $code;
+	public $name;
 	
 	public function getPrimaryKey() {
 		return 'id';

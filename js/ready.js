@@ -7,7 +7,8 @@ $(document).ready(function() {
 	texts.onReady.attach(function() {
 		var keys = new app.models.Keys(texts);
 		var bundles = new app.models.Bundles(keys);
-		bundles.refresh();
+		var projects = new app.models.Projects(bundles);
+		projects.refresh();
 	});
 	
 	$('#navbar .export').click(function() {
