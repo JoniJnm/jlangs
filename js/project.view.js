@@ -74,6 +74,9 @@
 		},
 		hideDelete: function() {
 			this.$btnDelete.hide();
+		},
+		getIdProject: function() {
+			return parseInt(this.$select.val());
 		}
 	};
 

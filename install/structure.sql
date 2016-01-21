@@ -15,6 +15,7 @@ CREATE TABLE `langs_keys` (
 
 CREATE TABLE `langs_langs` (
 `id` int(11) NOT NULL,
+  `id_project` int(11) NOT NULL,
   `code` char(2) CHARACTER SET ascii NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -37,7 +38,7 @@ ALTER TABLE `langs_keys`
  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `id_bundle_name` (`id_bundle`,`name`);
 
 ALTER TABLE `langs_langs`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `code` (`code`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `id_project` (`id_project`,`code`);
 
 ALTER TABLE `langs_projects`
  ADD PRIMARY KEY (`id`);
@@ -60,6 +61,9 @@ ADD CONSTRAINT `langs_bundles_ibfk_1` FOREIGN KEY (`id_project`) REFERENCES `lan
 
 ALTER TABLE `langs_keys`
 ADD CONSTRAINT `langs_keys_ibfk_1` FOREIGN KEY (`id_bundle`) REFERENCES `langs_bundles` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `langs_langs`
+ADD CONSTRAINT `langs_langs_ibfk_1` FOREIGN KEY (`id_project`) REFERENCES `langs_projects` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `langs_values`
 ADD CONSTRAINT `langs_values_ibfk_1` FOREIGN KEY (`id_lang`) REFERENCES `langs_langs` (`id`),

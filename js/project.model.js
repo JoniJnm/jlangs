@@ -23,6 +23,9 @@
 				}
 			});
 		},
+		getIdProject: function() {
+			return this.view.getIdProject();
+		},
 		add: function(name) {
 			var self = this;
 			$.post('rest/project/add', {

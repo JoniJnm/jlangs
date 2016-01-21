@@ -23,8 +23,13 @@ class ExportController extends \JNMFW\ControllerBase {
 		$this->langsModel = LangsModel::getInstance();
 	}
 	
+	private function getLangs() {
+		$id_project = $this->request->getUInt('id_project');
+		return $this->langModel->getByIdProject($id_project);
+	}
+	
 	public function json() {
-		$langs = $this->langModel->getAll();
+		$langs = $this->getLangs();
 		$exporter = new LangsExporter($langs);
 		$zipPath = $exporter->toJSON();
 		
@@ -32,7 +37,7 @@ class ExportController extends \JNMFW\ControllerBase {
 	}
 	
 	public function php_array() {
-		$langs = $this->langModel->getAll();
+		$langs = $this->getLangs();
 		$exporter = new LangsExporter($langs);
 		$zipPath = $exporter->toPHPArray();
 		
@@ -40,7 +45,7 @@ class ExportController extends \JNMFW\ControllerBase {
 	}
 	
 	public function php_class() {
-		$langs = $this->langModel->getAll();
+		$langs = $this->getLangs();
 		$namespace = null;
 		if (!$this->request->is_empty("namespace")) {
 			$namespace = $this->request->getRegex("[a-z\\\\]+", "namespace");
@@ -51,8 +56,9 @@ class ExportController extends \JNMFW\ControllerBase {
 		$this->end($zipPath, 'langs.zip');
 	}
 	
-	public function mysql() {
-		$langs = $this->langModel->getAll();
+	//disabled
+	private function mysql() {
+		$langs = $this->getLangs();
 		$exporter = new LangsExporter($langs);
 		$filePath = $exporter->toMySQL();
 		

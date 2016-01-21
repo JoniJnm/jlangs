@@ -6,6 +6,7 @@ use langs\Config;
 
 class LangTable extends \JNMFW\TableBase {
 	public $id;
+	public $id_project;
 	public $code;
 	
 	public function getPrimaryKey() {

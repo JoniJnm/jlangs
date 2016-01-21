@@ -24,8 +24,9 @@ class LangModel extends BaseModel {
 	/**
 	 * @return LangTable[]
 	 */
-	public function getAll() {
+	public function getByIdProject($id_project) {
 		return $this->db->getQueryBuilderSelect(Config::TABLE_LANGS)
+			->where('id_project', $id_project)
 			->loadObjectList();
 	}
 }

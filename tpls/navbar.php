@@ -5,7 +5,7 @@
 				<span class="navbar-brand" id="js-menu-title">Langs</span>
 			</div>
 			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
+				<li class="dropdown export-btn hidden">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 						Export <span class="caret"></span>
 					</a>
@@ -13,7 +13,7 @@
 						<li><a class="export" data-type="json" href="javascript:void(0)">JSON</a></li>
 						<li><a class="export" data-type="php_array" href="javascript:void(0)">PHP Array</a></li>
 						<li><a class="export" data-type="php_class" href="javascript:void(0)">PHP Class</a></li>
-						<li><a class="export" data-type="mysql" href="javascript:void(0)">MySQL</a></li>
+						<!--<li><a class="export" data-type="mysql" href="javascript:void(0)">MySQL</a></li>-->
 					</ul>
 				</li>
 			</ul>
