@@ -14,6 +14,7 @@
 						<li><a class="export" data-type="php_array" href="javascript:void(0)">PHP Array</a></li>
 						<li><a class="export" data-type="php_class" href="javascript:void(0)">PHP Class</a></li>
 						<!--<li><a class="export" data-type="mysql" href="javascript:void(0)">MySQL</a></li>-->
+						<li><a class="export" data-type="csv" href="javascript:void(0)">CSV</a></li>
 					</ul>
 				</li>
 			</ul>

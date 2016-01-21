@@ -17,10 +17,13 @@ class LangsExporter {
 	 */
 	private $langsModel;
 	
+	private $id_project;
+	
 	/**
 	 * @param LangTable[] $langs
 	 */
-	public function __construct($langs) {
+	public function __construct($id_project, $langs) {
+		$this->id_project = $id_project;
 		$this->langs = $langs;
 		$this->langsModel = LangsModel::getInstance();
 	}
@@ -101,6 +104,31 @@ class LangsExporter {
 		$exec .= " ".Config::DB_NAME." > '".$file."'";
 		exec($exec);
 		return $file;
+	}
+	
+	public function toCSV() {
+		$file = $this->getTempFile();
+		file_put_contents($file, '');
+		$texts = $this->langsModel->getTextsByIDProject($this->id_project, $this->langs);
+		if (!$texts) return $file;
+		$codes = array_diff(array_keys(get_object_vars($texts[0])), array('param'));
+		$this->exportCSVRow($file, array_merge(array(''), $codes)); //header
+		foreach ($texts as $text) {
+			$row = array();
+			$row[] = $text->param;
+			foreach ($codes as $code) {
+				$row[] = $text->$code;
+			}
+			$this->exportCSVRow($file, $row);
+		}
+		return $file;
+	}
+	
+	private function exportCSVRow($file, $row) {
+		$str = implode(',', array_map(function($value) {
+			return '"'.$value.'"';
+		}, $row))."\n";
+		file_put_contents($file, $str, FILE_APPEND);
 	}
 	
 	public function createZip($func) {

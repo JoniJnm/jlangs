@@ -22,4 +22,25 @@ class LangsModel extends \JNMFW\ModelSimple {
 		}
 		return $out;
 	}
+	
+	public function getTextsByIDProject($id_project, $langs) {
+		$query = $this->db->getQueryBuilderSelect(Config::TABLE_KEYS, 'k')
+				->columns('CONCAT(b.name, "_", k.name) AS param')
+				
+				->innerJoin(Config::TABLE_BUNDLES, 'b', 'b.id', 'k.id_bundle')
+				->where('b.id_project', $id_project);
+				
+		foreach ($langs as $lang) {
+			$code = $lang->code;
+			$tableAlias = 'l'.$code;
+			$query = $query
+					->columns($tableAlias.'.text AS '.$code)
+					->customJoin('LEFT', Config::TABLE_VALUES, $tableAlias, $this->db->createConditionAnds()
+						->whereColumns($tableAlias.'.id_key', 'k.id')
+						->where($tableAlias.'.id_lang', $lang->id)
+					);
+		}
+				
+		return $query->loadObjectList();
+	}
 }

@@ -23,51 +23,61 @@ class ExportController extends \JNMFW\ControllerBase {
 		$this->langsModel = LangsModel::getInstance();
 	}
 	
-	private function getLangs() {
+	/**
+	 * @return LangsExporter
+	 */
+	private function getExporter() {
 		$id_project = $this->request->getUInt('id_project');
-		return $this->langModel->getByIdProject($id_project);
+		$langs = $this->langModel->getByIdProject($id_project);
+		return new LangsExporter($id_project, $langs);
 	}
 	
 	public function json() {
-		$langs = $this->getLangs();
-		$exporter = new LangsExporter($langs);
+		$exporter = $this->getExporter();
 		$zipPath = $exporter->toJSON();
 		
-		$this->end($zipPath, 'langs.zip');
+		$this->endZip($zipPath, 'langs.zip');
 	}
 	
 	public function php_array() {
-		$langs = $this->getLangs();
-		$exporter = new LangsExporter($langs);
+		$exporter = $this->getExporter();
 		$zipPath = $exporter->toPHPArray();
 		
-		$this->end($zipPath, 'langs.zip');
+		$this->endZip($zipPath, 'langs.zip');
 	}
 	
 	public function php_class() {
-		$langs = $this->getLangs();
 		$namespace = null;
 		if (!$this->request->is_empty("namespace")) {
 			$namespace = $this->request->getRegex("[a-z\\\\]+", "namespace");
 		}
-		$exporter = new LangsExporter($langs);
+		$exporter = $this->getExporter();
 		$zipPath = $exporter->toPHPClass($namespace);
 		
-		$this->end($zipPath, 'langs.zip');
+		$this->endZip($zipPath, 'langs.zip');
 	}
 	
 	//disabled
 	private function mysql() {
-		$langs = $this->getLangs();
-		$exporter = new LangsExporter($langs);
+		$exporter = $this->getExporter();
 		$filePath = $exporter->toMySQL();
 		
-		$this->end($filePath, 'langs.sql');
+		$this->end($filePath, 'langs.sql', 'text/sql');
 	}
 	
-	private function end($filePath, $fileName) {
+	public function csv() {
+		$exporter = $this->getExporter();
+		$filePath = $exporter->toCSV();
+		$this->end($filePath, 'langs.csv', 'text/csv');
+	}
+	
+	private function endZip($filePath, $fileName, $contentType) {
+		$this->end($filePath, $fileName, 'application/zip');
+	}
+	
+	private function end($filePath, $fileName, $contentType) {
 		header('Content-Description: File Transfer');
-		header('Content-Type: application/zip');
+		header('Content-Type: '.$contentType);
 		header('Content-Disposition: attachment; filename="'.$fileName.'"');
 		header('Expires: 0');
 		header('Cache-Control: must-revalidate');
