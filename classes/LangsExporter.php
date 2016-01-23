@@ -30,39 +30,42 @@ class LangsExporter {
 	
 	public function toJSON() {
 		return $this->createZip(function($dir) {
-			$files = array();
+			$paths = array();
 			foreach ($this->langs as $lang) {
-				$file = $dir."/{$lang->code}.json";
+				$path = "{$lang->code}.json";
+				$file = $dir."/".$path;
 				$data = $this->langsModel->getTexts($lang->id);
-				file_put_contents($file, json_encode($data));
-				$files[] = $file;
+				$this->writeFile($file, json_encode($data));
+				$paths[] = $path;
 			}
-			return $files;
+			return $paths;
 		});
 	}
 	
 	public function toPHPArray() {
 		return $this->createZip(function($dir) {
-			$files = array();
+			$paths = array();
 			foreach ($this->langs as $lang) {
-				$file = $dir."/{$lang->code}.php";
+				$path = "{$lang->code}.php";
+				$file = $dir."/".$path;
 				$data = $this->langsModel->getTexts($lang->id);
 				$content = "<?php\n\$_LANG = ".var_export($data, true).";";
-				file_put_contents($file, $content);
-				$files[] = $file;
+				$this->writeFile($file, $content);
+				$paths[] = $path;
 			}
-			return $files;
+			return $paths;
 		});
 	}
 	
 	public function toPHPClass($namespace) {
 		return $this->createZip(function($dir) use ($namespace) {
-			$files = array();
+			$paths = array();
 			$keys = array();
 			$microtime = microtime(true);
 			foreach ($this->langs as $lang) {
 				$code = strtoupper($lang->code);
-				$file = $dir."/Lang{$code}.php";
+				$path = "Lang{$code}.php";
+				$file = $dir."/".$path;
 				$data = $this->langsModel->getTexts($lang->id);
 				$content = "<?php\n\n";
 				if ($namespace) $content .= "namespace ".$namespace.";\n\n";
@@ -78,12 +81,13 @@ class LangsExporter {
 				}
 				$content .= "}";
 				
-				file_put_contents($file, $content);
-				$files[] = $file;
+				$this->writeFile($file, $content);
+				$paths[] = $path;
 			}
 			$keys = array_unique($keys);
 			
-			$file = $dir."/Lang.php";
+			$path = "Lang.php";
+			$file = $dir."/".$path;
 			$content = "<?php\n\n";
 			if ($namespace) $content .= "namespace ".$namespace.";\n\n";
 			$content .= "abstract class Lang {\n";
@@ -91,10 +95,10 @@ class LangsExporter {
 				$content .= "\tconst $key = '{$key}';\n";
 			}
 			$content .= "}";
-			file_put_contents($file, $content);
-			$files[] = $file;
+			$this->writeFile($file, $content);
+			$paths[] = $path;
 			
-			return $files;
+			return $paths;
 		});
 	}
 	
@@ -108,7 +112,7 @@ class LangsExporter {
 	
 	public function toCSV() {
 		$file = $this->getTempFile();
-		file_put_contents($file, '');
+		$this->writeFile($file, '');
 		$texts = $this->langsModel->getTextsByIDProject($this->id_project, $this->langs);
 		if (!$texts) return $file;
 		$codes = array_diff(array_keys(get_object_vars($texts[0])), array('param'));
@@ -128,16 +132,57 @@ class LangsExporter {
 		$str = implode(',', array_map(function($value) {
 			return '"'.$value.'"';
 		}, $row))."\n";
-		file_put_contents($file, $str, FILE_APPEND);
+		$this->writeFile($file, $str, true);
 	}
 	
-	public function createZip($func) {
+	private function writeFile($file, $content, $append = false) {
+		$dir = dirname($file);
+		if (!is_dir($dir)) {
+			mkdir($dir, 0777, true);
+		}
+		$options = $append ? FILE_APPEND : 0;
+		return file_put_contents($file, $content, $options);
+	}
+	
+	public function toi18n() {
+		return $this->createZip(function($dir) {
+			$paths = array();
+			
+			$firstLang = true;
+			foreach ($this->langs as $lang) {
+				if ($firstLang) {
+					$path = 'langs/app.js';
+					$file = $dir."/".$path;
+					
+					$data = array();
+					for ($i=1; $i<count($this->langs); $i++) {
+						$data[$this->langs[$i]->code] = true;
+					}
+
+					$data['root'] = $this->langsModel->getTexts($lang->id);
+					$this->writeFile($file, 'define('.json_encode($data).')');
+					$paths[] = $path;
+					$firstLang = false;
+				}
+				else {
+					$path = "langs/{$lang->code}/app.js";
+					$file = $dir."/".$path;
+					$data = array('root' => $this->langsModel->getTexts($lang->id));
+					$this->writeFile($file, 'define('.json_encode($data).')');
+					$paths[] = $path;
+				}
+			}
+			return $paths;
+		});
+	}
+	
+	private function createZip($func) {
 		$dir = $this->createTempDir();
 		if (!$dir) {
 			throw new \Exception("Error creating temp directory");
 		}
 		
-		$files = $func($dir);
+		$paths = $func($dir);
 		
 		$zip = new \ZipArchive();
 		$zipPath = $this->getTempFile();
@@ -146,8 +191,8 @@ class LangsExporter {
 			throw new \Exception("Error creating zip file");
 		}
 		
-		foreach ($files as $file) {
-			$zip->addFile($file, basename($file));
+		foreach ($paths as $path) {
+			$zip->addFile($dir.'/'.$path, $path);
 		}
 		$zip->close();
 		

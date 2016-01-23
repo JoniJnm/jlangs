@@ -49,7 +49,7 @@ class ExportController extends \JNMFW\ControllerBase {
 	public function php_class() {
 		$namespace = null;
 		if (!$this->request->is_empty("namespace")) {
-			$namespace = $this->request->getRegex("[a-z\\\\]+", "namespace");
+			$namespace = $this->request->getRegex("[a-z0-9\\\\]+", "namespace");
 		}
 		$exporter = $this->getExporter();
 		$zipPath = $exporter->toPHPClass($namespace);
@@ -71,7 +71,13 @@ class ExportController extends \JNMFW\ControllerBase {
 		$this->end($filePath, 'langs.csv', 'text/csv');
 	}
 	
-	private function endZip($filePath, $fileName, $contentType) {
+	public function i18n() {
+		$exporter = $this->getExporter();
+		$zipPath = $exporter->toi18n();
+		$this->endZip($zipPath, 'langs.zip');
+	}
+	
+	private function endZip($filePath, $fileName) {
 		$this->end($filePath, $fileName, 'application/zip');
 	}
 	
