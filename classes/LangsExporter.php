@@ -35,7 +35,7 @@ class LangsExporter {
 				$path = "{$lang->code}.json";
 				$file = $dir."/".$path;
 				$data = $this->langsModel->getTexts($lang->id);
-				$this->writeFile($file, json_encode($data));
+				$this->writeFile($file, json_encode($data, JSON_PRETTY_PRINT));
 				$paths[] = $path;
 			}
 			return $paths;
@@ -151,7 +151,7 @@ class LangsExporter {
 			$firstLang = true;
 			foreach ($this->langs as $lang) {
 				if ($firstLang) {
-					$path = 'langs/app.js';
+					$path = 'nls/app.js';
 					$file = $dir."/".$path;
 					
 					$data = array();
@@ -160,15 +160,15 @@ class LangsExporter {
 					}
 
 					$data['root'] = $this->langsModel->getTexts($lang->id);
-					$this->writeFile($file, 'define('.json_encode($data).')');
+					$this->writeFile($file, 'define('.json_encode($data, JSON_PRETTY_PRINT).');');
 					$paths[] = $path;
 					$firstLang = false;
 				}
 				else {
-					$path = "langs/{$lang->code}/app.js";
+					$path = "nls/{$lang->code}/app.js";
 					$file = $dir."/".$path;
 					$data = array('root' => $this->langsModel->getTexts($lang->id));
-					$this->writeFile($file, 'define('.json_encode($data).')');
+					$this->writeFile($file, 'define('.json_encode($data, JSON_PRETTY_PRINT).');');
 					$paths[] = $path;
 				}
 			}
