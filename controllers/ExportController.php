@@ -23,6 +23,7 @@ class ExportController extends \JNMFW\ControllerBase {
 		$this->langsModel = LangsModel::getInstance();
 		$this->route
 			->get('/json')
+			->get('/json_var')
 			->get('/php_array')
 			->get('/php_class')
 			//->get('/mysql')
@@ -42,6 +43,17 @@ class ExportController extends \JNMFW\ControllerBase {
 	public function json() {
 		$exporter = $this->getExporter();
 		$zipPath = $exporter->toJSON();
+		
+		$this->endZip($zipPath, 'langs.zip');
+	}
+	
+	public function json_var() {
+		$varname = 'lang';
+		if (!$this->request->is_empty("varname")) {
+			$varname = $this->request->getCmd('varname');
+		}
+		$exporter = $this->getExporter();
+		$zipPath = $exporter->toJSONVar($varname);
 		
 		$this->endZip($zipPath, 'langs.zip');
 	}

@@ -28,6 +28,13 @@ $(document).ready(function() {
 			}
 			location.href = url;
 		}
+		else if (type === 'json_var') {
+			var varname = prompt("Var name", 'lang');
+			if (varname) {
+				url += '&varname='+encodeURIComponent(varname);
+			}
+			location.href = url;
+		}
 		else {
 			location.href = url;
 		}

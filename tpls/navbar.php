@@ -11,6 +11,7 @@
 					</a>
 					<ul class="dropdown-menu">
 						<li><a class="export" data-type="json" href="javascript:void(0)">JSON</a></li>
+						<li><a class="export" data-type="json_var" href="javascript:void(0)">JSON var</a></li>
 						<li><a class="export" data-type="i18n" href="javascript:void(0)">i18n</a></li>
 						<li><a class="export" data-type="php_array" href="javascript:void(0)">PHP Array</a></li>
 						<li><a class="export" data-type="php_class" href="javascript:void(0)">PHP Class</a></li>
