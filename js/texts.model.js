@@ -17,10 +17,15 @@
 		refresh: function(id_key) {
 			this.id_key = id_key;
 			var self = this;
-			$.get('rest/text/get', {
-				id_key: id_key
-			}, function(langs) {
-				self.view.refresh(langs);
+			$.ajax({
+				url: 'rest/text',
+				type: 'get',
+				data: {
+					id_key: id_key
+				},
+				success: function(langs) {
+					self.view.refresh(langs);
+				}
 			});
 		},
 		clear: function() {
@@ -28,21 +33,31 @@
 		},
 		save: function(id_lang, text) {
 			var self = this;
-			$.post('rest/text/save', {
-				id_key: this.id_key,
-				id_lang: id_lang,
-				text: text
-			}).done(function() {
-				self.view.langSaved(id_lang);
+			$.ajax({
+				url: 'rest/text',
+				type: 'post',
+				data: {
+					id_key: this.id_key,
+					id_lang: id_lang,
+					text: text
+				},
+				success: function() {
+					self.view.langSaved(id_lang);
+				}
 			});
 		},
 		remove: function(id_lang) {
 			var self = this;
-			$.post('rest/text/delete', {
-				id_key: this.id_key,
-				id_lang: id_lang
-			}).done(function() {
-				self.view.clearLang(id_lang);
+			$.ajax({
+				url: 'rest/delete',
+				type: 'post',
+				data: {
+					id_key: this.id_key,
+					id_lang: id_lang
+				},
+				success: function() {
+					self.view.clearLang(id_lang);
+				}
 			});
 		}
 	};

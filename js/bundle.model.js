@@ -18,22 +18,32 @@
 			this.id_project = id_project;
 			
 			var self = this;
-			$.get('rest/bundle/get', {
-				id_project: id_project
-			}, function(list) {
-				self.keys.clear();
-				self.view.refreshList(list);
-				self.view.showAdder();
+			$.ajax({
+				url: 'rest/bundle',
+				type: 'get',
+				data: {
+					id_project: id_project
+				},
+				success: function(list) {
+					self.keys.clear();
+					self.view.refreshList(list);
+					self.view.showAdder();
+				}
 			});
 		},
 		add: function(name) {
 			var self = this;
-			$.post('rest/bundle/add', {
-				id_project: this.id_project,
-				name: name
-			}).done(function(id_bundle) {
-				self.view.add(id_bundle, name, true);
-				self.view.clearAdder();
+			$.ajax({
+				url: 'rest/bundle',
+				type: 'post',
+				data: {
+					id_project: this.id_project,
+					name: name
+				},
+				success: function(id_bundle) {
+					self.view.add(id_bundle, name, true);
+					self.view.clearAdder();
+				}
 			});
 		},
 		clear: function() {
@@ -44,10 +54,15 @@
 		},
 		remove: function(id_bundle) {
 			var self = this;
-			$.post('rest/bundle/delete', {
-				id_bundle: id_bundle
-			}).done(function() {
-				self.view.remove(id_bundle);
+			$.ajax({
+				url: 'rest/bundle',
+				type: 'delete',
+				data: {
+					id_bundle: id_bundle
+				},
+				success: function() {
+					self.view.remove(id_bundle);
+				}
 			});
 		},
 		onChange: function(id_bundle) {

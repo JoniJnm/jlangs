@@ -15,11 +15,15 @@
 	Model.prototype = {
 		refresh: function() {
 			var self = this;
-			$.get('rest/project/get', function(list) {
-				self.view.refreshList(list);
-				if (list.length === 1) {
-					var project = list[0];
-					self.view.$select.val(project.id).change();
+			$.ajax({
+				url: 'rest/project',
+				type: 'get',
+				success: function(list) {
+					self.view.refreshList(list);
+					if (list.length === 1) {
+						var project = list[0];
+						self.view.$select.val(project.id).change();
+					}
 				}
 			});
 		},
@@ -28,19 +32,29 @@
 		},
 		add: function(name) {
 			var self = this;
-			$.post('rest/project/add', {
-				name: name
-			}).done(function(id_project) {
-				self.view.add(id_project, name, true);
-				self.view.clearAdder();
+			$.ajax({
+				url: 'rest/project',
+				type: 'post',
+				data: {
+					name: name
+				},
+				success: function(id_project) {
+					self.view.add(id_project, name, true);
+					self.view.clearAdder();
+				}
 			});
 		},
 		remove: function(id_project) {
 			var self = this;
-			$.post('rest/project/delete', {
-				id_project: id_project
-			}).done(function() {
-				self.view.remove(id_project);
+			$.ajax({
+				url: 'rest/project',
+				type: 'delete',
+				data: {
+					id_project: id_project
+				},
+				success: function() {
+					self.view.remove(id_project);
+				}
 			});
 		},
 		onChange: function(id_project) {

@@ -11,18 +11,18 @@ class KeyController extends \JNMFW\ControllerBase {
 	 */
 	private $keyModel;
 	
-	public function __construct() {
-		parent::__construct();
+	public function __construct($route) {
+		parent::__construct($route);
 		$this->keyModel = KeyModel::getInstance();
 	}
 	
-	public function get() {
+	public function fetch() {
 		$id_bundle = $this->request->getUInt('id_bundle');
 		$data = $this->keyModel->getByIdBundle($id_bundle);
 		$this->server->sendData($data);
 	}
 	
-	public function add() {
+	public function create() {
 		$id_bundle = $this->request->getUInt('id_bundle');
 		$name = $this->request->getCmd('name');
 		
@@ -34,7 +34,7 @@ class KeyController extends \JNMFW\ControllerBase {
 		$this->server->sendData($item->id);
 	}
 	
-	public function delete() {
+	public function destroy() {
 		$id_key = $this->request->getUInt('id_key');
 		$this->keyModel->delete($id_key);
 		$this->server->sendOK();

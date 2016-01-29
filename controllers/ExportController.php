@@ -17,10 +17,17 @@ class ExportController extends \JNMFW\ControllerBase {
 	 */
 	private $langsModel;
 	
-	public function __construct() {
-		parent::__construct();
+	public function __construct($route) {
+		parent::__construct($route);
 		$this->langModel = LangModel::getInstance();
 		$this->langsModel = LangsModel::getInstance();
+		$this->route
+			->get('/json')
+			->get('/php_array')
+			->get('/php_class')
+			//->get('/mysql')
+			->get('/csv')
+			->get('/i18n');
 	}
 	
 	/**
@@ -57,8 +64,7 @@ class ExportController extends \JNMFW\ControllerBase {
 		$this->endZip($zipPath, 'langs.zip');
 	}
 	
-	//disabled
-	private function mysql() {
+	public function mysql() {
 		$exporter = $this->getExporter();
 		$filePath = $exporter->toMySQL();
 		

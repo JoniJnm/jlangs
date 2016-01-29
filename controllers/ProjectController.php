@@ -11,17 +11,17 @@ class ProjectController extends \JNMFW\ControllerBase {
 	 */
 	private $projectModel;
 	
-	public function __construct() {
-		parent::__construct();
+	public function __construct($route) {
+		parent::__construct($route);
 		$this->projectModel = ProjectModel::getInstance();
 	}
 	
-	public function get() {
+	public function fetch() {
 		$data = $this->projectModel->getAll();
 		$this->server->sendData($data);
 	}
 	
-	public function add() {
+	public function create() {
 		$name = $this->request->getCmd('name');
 		
 		$item = new ProjectTable();
@@ -31,7 +31,7 @@ class ProjectController extends \JNMFW\ControllerBase {
 		$this->server->sendData($item->id);
 	}
 	
-	public function delete() {
+	public function destroy() {
 		$id_project = $this->request->getUInt('id_project');
 		$this->projectModel->delete($id_project);
 		$this->server->sendOK();

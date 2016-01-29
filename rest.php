@@ -1,14 +1,16 @@
 <?php
 
-namespace langs;
-
-use JNMFW\helpers\HServer;
 use JNMFW\helpers\HTimer;
-use JNMFW\helpers\HLog;
+use JNMFW\classes\App;
 
 error_reporting(E_ALL);
 
 header('Access-Control-Allow-Origin: *');
+
+if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') == 'OPTIONS') {
+	header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+	exit;
+}
 
 require(__DIR__.'/includes/init.php');
 
@@ -30,21 +32,6 @@ register_shutdown_function(function() {
 
 HTimer::init('Request');
 
-$request = \JNMFW\classes\Request::getInstance();
-
-$controllerName = $request->getCmd('controller');
-$task = $request->getCmd('task');
-
-HLog::verbose('Request init '.$controllerName.'::'.$task);
-
-$controllerName = '\langs\controllers\\'.  \ucfirst($controllerName)."Controller";
-if (!\class_exists($controllerName)) {
-	HServer::sendNotFound("No existe el controllador $controllerName");
-}
-
-$controller = new $controllerName();
-if (!\is_callable(array($controller, $task))) {
-	HServer::sendNotFound("No existe el método $task");
-}
-
-\call_user_func(array($controller, $task));
+(new App())
+	->controllers('/rest', '\langs\controllers')
+	->run();

@@ -18,30 +18,45 @@
 			this.id_bundle = id_bundle;
 
 			var self = this;
-			$.get('rest/key/get', {
-				id_bundle: id_bundle
-			}).done(function(list) {
-				self.texts.clear();
-				self.view.refreshList(list);
-				self.view.showAdder();
+			$.ajax({
+				url: 'rest/key',
+				type: 'get',
+				data: {
+					id_bundle: id_bundle
+				},
+				success: function(list) {
+					self.texts.clear();
+					self.view.refreshList(list);
+					self.view.showAdder();
+				}
 			});
 		},
 		remove: function(id_key) {
 			var self = this;
-			$.post('rest/key/delete', {
-				id_key: id_key
-			}).done(function() {
-				self.view.remove(id_key);
+			$.ajax({
+				url: 'rest/key',
+				type: 'delete',
+				data: {
+					id_key: id_key
+				},
+				success: function() {
+					self.view.remove(id_key);
+				}
 			});
 		},
 		add: function(name) {
 			var self = this;
-			$.post('rest/key/add', {
-				id_bundle: this.id_bundle,
-				name: name
-			}, function(id_key) {
-				self.view.add(id_key, name, true);
-				self.view.clearAdder();
+			$.ajax({
+				url: 'rest/key',
+				type: 'post',
+				data: {
+					id_bundle: this.id_bundle,
+					name: name
+				},
+				success: function(id_key) {
+					self.view.add(id_key, name, true);
+					self.view.clearAdder();
+				}
 			});
 		},
 		clear: function() {

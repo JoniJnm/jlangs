@@ -10,18 +10,18 @@ class TextController extends \JNMFW\ControllerBase {
 	 */
 	private $textModel;
 	
-	public function __construct() {
-		parent::__construct();
+	public function __construct($route) {
+		parent::__construct($route);
 		$this->textModel = TextModel::getInstance();
 	}
 	
-	public function get() {
+	public function fetch() {
 		$id_key = $this->request->getUInt('id_key');
 		$data = $this->textModel->getByIdKey($id_key);
 		$this->server->sendData($data);
 	}
 	
-	public function save() {
+	public function create() {
 		$id_lang = $this->request->getUInt('id_lang');
 		$id_key = $this->request->getUInt('id_key');
 		$text = $this->request->getString('text');
@@ -31,7 +31,7 @@ class TextController extends \JNMFW\ControllerBase {
 		$this->server->sendOK();
 	}
 	
-	public function delete() {
+	public function destroy() {
 		$id_lang = $this->request->getUInt('id_lang');
 		$id_key = $this->request->getUInt('id_key');
 		

@@ -11,18 +11,18 @@ class BundleController extends \JNMFW\ControllerBase {
 	 */
 	private $bundleModel;
 	
-	public function __construct() {
-		parent::__construct();
+	public function __construct($route) {
+		parent::__construct($route);
 		$this->bundleModel = BundleModel::getInstance();
 	}
 	
-	public function get() {
+	public function fetch() {
 		$id_project = $this->request->getUInt('id_project');
 		$data = $this->bundleModel->getByIdProject($id_project);
 		$this->server->sendData($data);
 	}
 	
-	public function add() {
+	public function create() {
 		$id_project = $this->request->getUInt('id_project');
 		$name = $this->request->getCmd('name');
 		
@@ -34,7 +34,7 @@ class BundleController extends \JNMFW\ControllerBase {
 		$this->server->sendData($item->id);
 	}
 	
-	public function delete() {
+	public function destroy() {
 		$id_bundle = $this->request->getUInt('id_bundle');
 		$this->bundleModel->delete($id_bundle);
 		$this->server->sendOK();
