@@ -14,6 +14,8 @@ class BundleController extends \JNMFW\ControllerBase {
 	public function __construct($route) {
 		parent::__construct($route);
 		$this->bundleModel = BundleModel::getInstance();
+		$this->route
+			->addDefaults();
 	}
 	
 	public function fetch() {
@@ -35,7 +37,7 @@ class BundleController extends \JNMFW\ControllerBase {
 	}
 	
 	public function destroy() {
-		$id_bundle = $this->request->getUInt('id_bundle');
+		$id_bundle = $this->request->getUInt('id');
 		$this->bundleModel->delete($id_bundle);
 		$this->server->sendOK();
 	}

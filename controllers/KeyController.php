@@ -14,6 +14,8 @@ class KeyController extends \JNMFW\ControllerBase {
 	public function __construct($route) {
 		parent::__construct($route);
 		$this->keyModel = KeyModel::getInstance();
+		$this->route
+			->addDefaults();
 	}
 	
 	public function fetch() {
@@ -35,7 +37,7 @@ class KeyController extends \JNMFW\ControllerBase {
 	}
 	
 	public function destroy() {
-		$id_key = $this->request->getUInt('id_key');
+		$id_key = $this->request->getUInt('id');
 		$this->keyModel->delete($id_key);
 		$this->server->sendOK();
 	}

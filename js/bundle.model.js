@@ -55,11 +55,8 @@
 		remove: function(id_bundle) {
 			var self = this;
 			$.ajax({
-				url: 'rest/bundle',
+				url: 'rest/bundle/'+id_bundle,
 				type: 'delete',
-				data: {
-					id_bundle: id_bundle
-				},
 				success: function() {
 					self.view.remove(id_bundle);
 				}

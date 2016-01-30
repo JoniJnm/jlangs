@@ -14,6 +14,8 @@ class ProjectController extends \JNMFW\ControllerBase {
 	public function __construct($route) {
 		parent::__construct($route);
 		$this->projectModel = ProjectModel::getInstance();
+		$this->route
+			->addDefaults();
 	}
 	
 	public function fetch() {
@@ -32,7 +34,7 @@ class ProjectController extends \JNMFW\ControllerBase {
 	}
 	
 	public function destroy() {
-		$id_project = $this->request->getUInt('id_project');
+		$id_project = $this->request->getUInt('id');
 		$this->projectModel->delete($id_project);
 		$this->server->sendOK();
 	}

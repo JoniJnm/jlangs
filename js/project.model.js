@@ -47,11 +47,8 @@
 		remove: function(id_project) {
 			var self = this;
 			$.ajax({
-				url: 'rest/project',
+				url: 'rest/project/'+id_project,
 				type: 'delete',
-				data: {
-					id_project: id_project
-				},
 				success: function() {
 					self.view.remove(id_project);
 				}

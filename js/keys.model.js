@@ -34,11 +34,8 @@
 		remove: function(id_key) {
 			var self = this;
 			$.ajax({
-				url: 'rest/key',
+				url: 'rest/key/'+id_key,
 				type: 'delete',
-				data: {
-					id_key: id_key
-				},
 				success: function() {
 					self.view.remove(id_key);
 				}

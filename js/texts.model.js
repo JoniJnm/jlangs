@@ -49,7 +49,7 @@
 		remove: function(id_lang) {
 			var self = this;
 			$.ajax({
-				url: 'rest/delete',
+				url: 'rest/text/clear',
 				type: 'post',
 				data: {
 					id_key: this.id_key,

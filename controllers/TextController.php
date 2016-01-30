@@ -13,6 +13,9 @@ class TextController extends \JNMFW\ControllerBase {
 	public function __construct($route) {
 		parent::__construct($route);
 		$this->textModel = TextModel::getInstance();
+		$this->route
+			->post('/clear', 'destroy')
+			->addDefaults();
 	}
 	
 	public function fetch() {
