@@ -46,7 +46,7 @@ class LangsExporter {
 		return $this->createZip(function($dir) use ($varname) {
 			$paths = array();
 			foreach ($this->langs as $lang) {
-				$path = "{$lang->code}.json";
+				$path = "{$lang->code}.js";
 				$file = $dir."/".$path;
 				$data = $this->langsModel->getTexts($lang->id);
 				$this->writeFile($file, $varname.' = '.json_encode($data, JSON_FORCE_OBJECT | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).';');
