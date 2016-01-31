@@ -5,7 +5,7 @@ namespace langs\controllers;
 use langs\models\KeyModel;
 use langs\tables\KeyTable;
 
-class KeyController extends \JNMFW\ControllerBase {
+class KeyController extends BaseController {
 	/**
 	 * @var KeyModel
 	 */
@@ -14,8 +14,7 @@ class KeyController extends \JNMFW\ControllerBase {
 	public function __construct($route) {
 		parent::__construct($route);
 		$this->keyModel = KeyModel::getInstance();
-		$this->route
-			->addDefaults();
+		$this->addDefaultRoute();
 	}
 	
 	public function fetch() {

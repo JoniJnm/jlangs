@@ -5,7 +5,7 @@ namespace langs\controllers;
 use langs\models\BundleModel;
 use langs\tables\BundleTable;
 
-class BundleController extends \JNMFW\ControllerBase {
+class BundleController extends BaseController {
 	/**
 	 * @var BundleModel
 	 */
@@ -14,8 +14,7 @@ class BundleController extends \JNMFW\ControllerBase {
 	public function __construct($route) {
 		parent::__construct($route);
 		$this->bundleModel = BundleModel::getInstance();
-		$this->route
-			->addDefaults();
+		$this->addDefaultRoute();
 	}
 	
 	public function fetch() {

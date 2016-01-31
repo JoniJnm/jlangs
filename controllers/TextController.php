@@ -4,7 +4,7 @@ namespace langs\controllers;
 
 use langs\models\TextModel;
 
-class TextController extends \JNMFW\ControllerBase {
+class TextController extends BaseController {
 	/**
 	 * @var TextModel
 	 */
@@ -14,8 +14,8 @@ class TextController extends \JNMFW\ControllerBase {
 		parent::__construct($route);
 		$this->textModel = TextModel::getInstance();
 		$this->route
-			->post('/clear', 'destroy')
-			->addDefaults();
+			->post('/clear', 'destroy');
+		$this->addDefaultRoute();
 	}
 	
 	public function fetch() {

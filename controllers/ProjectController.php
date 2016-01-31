@@ -5,7 +5,7 @@ namespace langs\controllers;
 use langs\models\ProjectModel;
 use langs\tables\ProjectTable;
 
-class ProjectController extends \JNMFW\ControllerBase {
+class ProjectController extends BaseController {
 	/**
 	 * @var ProjectModel
 	 */
@@ -14,11 +14,10 @@ class ProjectController extends \JNMFW\ControllerBase {
 	public function __construct($route) {
 		parent::__construct($route);
 		$this->projectModel = ProjectModel::getInstance();
-		$this->route
-			->addDefaults();
+		$this->addDefaultRoute();
 	}
 	
-	public function fetch() {
+	public function fetchAll() {
 		$data = $this->projectModel->getAll();
 		$this->server->sendData($data);
 	}
