@@ -179,7 +179,7 @@ class LangsExporter {
 				else {
 					$path = "nls/{$lang->code}/app.js";
 					$file = $dir."/".$path;
-					$data = array('root' => $this->langsModel->getTexts($lang->id));
+					$data = $this->langsModel->getTexts($lang->id);
 					$this->writeFile($file, 'define('.json_encode($data, JSON_PRETTY_PRINT).');');
 					$paths[] = $path;
 				}
