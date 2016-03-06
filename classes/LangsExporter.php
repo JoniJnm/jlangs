@@ -71,49 +71,6 @@ class LangsExporter {
 		});
 	}
 	
-	public function toPHPClass($namespace) {
-		return $this->createZip(function($dir) use ($namespace) {
-			$paths = array();
-			$keys = array();
-			foreach ($this->langs as $lang) {
-				$code = strtoupper($lang->code);
-				$path = "Lang{$code}.php";
-				$file = $dir."/".$path;
-				$data = $this->langsModel->getTexts($lang->id);
-				$content = "<?php\n\n";
-				if ($namespace) $content .= "namespace ".$namespace.";\n\n";
-				$content .= "abstract class Lang{$code} {\n";
-				foreach ($data as $bundle => $_data) {
-					foreach ($_data as $key => $text) {
-						$k = $bundle."_".$key;
-						$k = str_replace('.', '_', $k);
-						$keys[] = $k;
-						$content .= "\tconst $k = ".var_export($text, true).";\n";
-					}
-				}
-				$content .= "}";
-				
-				$this->writeFile($file, $content);
-				$paths[] = $path;
-			}
-			$keys = array_unique($keys);
-			
-			$path = "Lang.php";
-			$file = $dir."/".$path;
-			$content = "<?php\n\n";
-			if ($namespace) $content .= "namespace ".$namespace.";\n\n";
-			$content .= "abstract class Lang {\n";
-			foreach ($keys as $key) {
-				$content .= "\tconst $key = '{$key}';\n";
-			}
-			$content .= "}";
-			$this->writeFile($file, $content);
-			$paths[] = $path;
-			
-			return $paths;
-		});
-	}
-	
 	public function toMySQL() {
 		$file = $this->getTempFile();
 		$exec = "mysqldump -u".Config::DB_USER.' -p"'.Config::DB_PASSWORD.'"';
@@ -160,29 +117,22 @@ class LangsExporter {
 		return $this->createZip(function($dir) {
 			$paths = array();
 			
-			$firstLang = true;
+			$path = 'nls/app.js';
+			$file = $dir."/".$path;
+			$data = array();
+			for ($i=1; $i<count($this->langs); $i++) {
+				$data[$this->langs[$i]->code] = true;
+			}
+			$data['root'] = array();
+			$this->writeFile($file, 'define('.json_encode($data, JSON_PRETTY_PRINT).');');
+			$paths[] = $path;
+			
 			foreach ($this->langs as $lang) {
-				if ($firstLang) {
-					$path = 'nls/app.js';
-					$file = $dir."/".$path;
-					
-					$data = array();
-					for ($i=1; $i<count($this->langs); $i++) {
-						$data[$this->langs[$i]->code] = true;
-					}
-
-					$data['root'] = $this->langsModel->getTexts($lang->id);
-					$this->writeFile($file, 'define('.json_encode($data, JSON_PRETTY_PRINT).');');
-					$paths[] = $path;
-					$firstLang = false;
-				}
-				else {
-					$path = "nls/{$lang->code}/app.js";
-					$file = $dir."/".$path;
-					$data = $this->langsModel->getTexts($lang->id);
-					$this->writeFile($file, 'define('.json_encode($data, JSON_PRETTY_PRINT).');');
-					$paths[] = $path;
-				}
+				$path = "nls/{$lang->code}/app.js";
+				$file = $dir."/".$path;
+				$data = $this->langsModel->getTexts($lang->id);
+				$this->writeFile($file, 'define('.json_encode($data, JSON_PRETTY_PRINT).');');
+				$paths[] = $path;
 			}
 			return $paths;
 		});

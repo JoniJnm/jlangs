@@ -21,13 +21,38 @@ class KeyModel extends BaseModel {
 		return parent::getObjsByIDs($ids, 'Key');
 	}
 	
+	public function createFromDic($id_project, $dic) {
+		$query = $this->db->getQueryBuilderInsert(Config::TABLE_KEYS);
+		foreach ($dic as $hash => $value) {
+			$query->data(array(
+				'id_project' => $id_project,
+				'hash' => $hash,
+				'default_value' => $value
+			));
+		}
+		return $query->execute();
+	}
+	
 	/**
 	 * @return KeyTable[]
 	 */
-	public function getByIdBundle($id_bundle) {
+	public function getByIdProject($id_project) {
 		return $this->db->getQueryBuilderSelect(Config::TABLE_KEYS)
-			->where('id_bundle', $id_bundle)
-			->loadObjectList();
+			->where('id_project', $id_project)
+			->loadObjectList(KeyTable::class);
+	}
+	
+	public function deleteByHashes($hashes) {
+		return $this->db->getQueryBuilderDelete(Config::TABLE_KEYS)
+			->whereIn('hash', $hashes)
+			->execute();
+	}
+	
+	public function getHashesByIdProject($id_project) {
+		return $this->db->getQueryBuilderSelect(Config::TABLE_KEYS)
+			->columns('hash')
+			->where('id_project', $id_project)
+			->loadValueArray();
 	}
 	
 	public function delete($id_key) {

@@ -3,8 +3,8 @@
 (function() {
 	'use strict';
 	
-	var Model = function(bundles) {
-		this.bundles = bundles;
+	var Model = function(keys) {
+		this.keys = keys;
 		this.view = new app.views.Projects();
 		
 		this.view.onAdd.attach(this.add, this);
@@ -57,11 +57,11 @@
 		onChange: function(id_project) {
 			if (id_project > 0) {
 				this.view.showDelete();
-				this.bundles.refresh(id_project);
+				this.keys.refresh(id_project);
 			}
 			else {
 				this.view.hideDelete();
-				this.bundles.clear();
+				this.keys.clear();
 			}
 		}
 	};

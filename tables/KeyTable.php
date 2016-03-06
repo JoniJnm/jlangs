@@ -5,8 +5,10 @@ namespace langs\tables;
 use langs\Config;
 
 class KeyTable extends \JNMFW\TableBase {
-	public $id_bundle;
-	public $name;
+	public $id;
+	public $id_project;
+	public $hash;
+	public $default_value;
 	
 	public function getPrimaryKey() {
 		return 'id';

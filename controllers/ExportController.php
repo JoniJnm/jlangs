@@ -25,7 +25,6 @@ class ExportController extends BaseController {
 			->get('/json')
 			->get('/json_var')
 			->get('/php_array')
-			->get('/php_class')
 			//->get('/mysql')
 			->get('/csv')
 			->get('/i18n');
@@ -61,17 +60,6 @@ class ExportController extends BaseController {
 	public function php_array() {
 		$exporter = $this->getExporter();
 		$zipPath = $exporter->toPHPArray();
-		
-		$this->endZip($zipPath, 'langs.zip');
-	}
-	
-	public function php_class() {
-		$namespace = null;
-		if (!$this->request->is_empty("namespace")) {
-			$namespace = $this->request->getRegex("[a-z0-9\\\\]+", "namespace");
-		}
-		$exporter = $this->getExporter();
-		$zipPath = $exporter->toPHPClass($namespace);
 		
 		$this->endZip($zipPath, 'langs.zip');
 	}

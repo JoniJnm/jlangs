@@ -25,11 +25,10 @@ class TextModel extends BaseModel {
 	 * @return ValueTable[]
 	 */
 	public function getByIdKey($id_key) {
-		$id_project = $this->db->getQueryBuilderSelect(Config::TABLE_KEYS, 'k')
-			->columns('b.id_project')
-			->innerJoin(Config::TABLE_BUNDLES, 'b', 'b.id', 'k.id_bundle')
-			->where('k.id', $id_key)
-			->loadValue();	
+		$id_project = $this->db->getQueryBuilderSelect(Config::TABLE_KEYS)
+			->columns('id_project')
+			->where('id', $id_key)
+			->loadValue();
 		
 		return $this->db->getQueryBuilderSelect(Config::TABLE_LANGS, 'l')
 			->columns(array('l.id AS id_lang', 'v.text', 'l.code AS lang_code'))
@@ -39,7 +38,7 @@ class TextModel extends BaseModel {
 			)
 			->where('l.id_project', $id_project)
 			->order('l.id')
-			->loadObjectList();
+			->loadObjectList();			
 	}
 	
 	public function save($id_lang, $id_key, $text) {

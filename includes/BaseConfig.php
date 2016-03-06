@@ -10,7 +10,6 @@ abstract class BaseConfig {
 	
 	const APACHE_LOG_FILE = 'logs/php_errors.log';
 	
-	const TABLE_BUNDLES = '#__bundles';
 	const TABLE_KEYS = '#__keys';
 	const TABLE_LANGS = '#__langs';
 	const TABLE_VALUES = '#__values';
