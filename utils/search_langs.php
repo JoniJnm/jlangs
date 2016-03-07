@@ -25,14 +25,11 @@ function search_langs($folderSearch, $exts, $funcNames, $fileOutput, $exc_folder
 	));
 	foreach ($files as $file) {
 		$file = $folderSearch.'/'.$file;
-		preg_match_all("/[^a-zA-Z0-1\-_](?:".implode('|', $funcNames).")\s?\((.*?(?:\"|'))\)/", file_get_contents($file), $matchs);
+		preg_match_all("/[^a-zA-Z0-9\-_](?:".implode('|', $funcNames).")\s?\((.*?(?:\"|'))\)/", file_get_contents($file), $matchs);
 		if (!$matchs) continue;
 		foreach ($matchs[1] as $m) {
 			$text = trim($m);
 			$text = trim($text, $text[0]);
-			$key = basename($file);
-			$pos = stripos($key, '.');
-			$key = substr($key, 0, $pos);
 			$out[md5($text)] = $text;
 		}
 	}
