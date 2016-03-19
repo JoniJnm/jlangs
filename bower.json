@@ -1,5 +1,5 @@
 {
-  "name": "langs",
+  "name": "jlangs",
   "description": "Simple Language Manager",
   "main": "index.php",
   "authors": [
@@ -11,7 +11,7 @@
     "manager",
     "php"
   ],
-  "homepage": "https://github.com/JoniJnm/langs",
+  "homepage": "https://github.com/JoniJnm/jlangs",
   "moduleType": [
     "amd"
   ],
