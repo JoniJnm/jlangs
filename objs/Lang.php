@@ -2,13 +2,16 @@
 
 namespace langs\objs;
 
+use JNMFW\ObjBase;
 use langs\tables\LangTable;
 
-class Key extends \JNMFW\ObjBase {
+class Key extends ObjBase
+{
 	/**
 	 * @return LangTable
 	 */
-	public function getItem() {
+	public function getItem()
+	{
 		return $this->item;
 	}
 }

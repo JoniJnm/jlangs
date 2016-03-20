@@ -2,10 +2,10 @@
 
 namespace Tienda\includes;
 
-use JNMFW\helpers\HLog;
-use langs\Config;
 use JNMFW\classes\databases\DBFactory;
 use JNMFW\classes\databases\mysqli\MySQLiDriver;
+use JNMFW\helpers\HLog;
+use langs\Config;
 
 require('jnmfw/AutoLoad.php');
 
@@ -16,7 +16,7 @@ require('jnmfw/AutoLoad.php');
 $logfile = Config::APACHE_LOG_FILE;
 if ($logfile) {
 	if (substr($logfile, 0, 1) != '/') {
-		$logfile = dirname(__DIR__).'/'.$logfile;
+		$logfile = dirname(__DIR__) . '/' . $logfile;
 	}
 	ini_set("error_log", $logfile);
 }
@@ -24,7 +24,7 @@ if ($logfile) {
 $logfile = Config::LOG_FILE;
 if ($logfile) {
 	if (substr($logfile, 0, 1) != '/') {
-		$logfile = dirname(__DIR__).'/'.$logfile;
+		$logfile = dirname(__DIR__) . '/' . $logfile;
 	}
 	HLog::setFile($logfile);
 }

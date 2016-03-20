@@ -1,5 +1,5 @@
 {
-  "name": "langs",
+  "name": "jlangs",
   "version": "1.0.0",
   "description": "Simple Language Manager",
   "main": "index.php",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://JoniJnm@github.com/JoniJnm/langs.git"
+    "url": "git+https://JoniJnm@github.com/JoniJnm/jlangs.git"
   },
   "keywords": [
     "lang",
@@ -18,9 +18,9 @@
   "author": "JoniJnm",
   "license": "GPL-2.0",
   "bugs": {
-    "url": "https://github.com/JoniJnm/langs/issues"
+    "url": "https://github.com/JoniJnm/jlangs/issues"
   },
-  "homepage": "https://github.com/JoniJnm/langs#readme",
+  "homepage": "https://github.com/JoniJnm/jlangs#readme",
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-less": "^3.0.5",

@@ -37,7 +37,8 @@
 		});
 		
 		this.$saveAllBtn.click(function() {
-			$('.translation .save', this.$langs).each(function() {
+			$('.translation .save', self.$langs).each(function ()
+			{
 				$(this).click();
 			});
 		});

@@ -8,10 +8,6 @@
 		this.$select = this.$filter.find('select');
 		this.$btnDelete = this.$filter.find('.delete');
 
-		this.$adder = $('#add-key');
-		this.$formAdd = this.$adder.find('form');
-		this.$name = this.$formAdd.find('input');
-
 		this.tplOption = jstemplate.parse('<option value="{value}">{text}</option>');
 
 		this.onDelete = new Event();
@@ -23,10 +19,6 @@
 		this.$btnDelete.click(function() {
 			var id_key = parseInt(self.$select.val());
 			self.onDelete.trigger(id_key);
-		});
-		this.$formAdd.submit(function(event) {
-			event.preventDefault();
-			self.onAdd.trigger(self.$name.val());
 		});
 		this.$select.change(function() {
 			self.onChange.trigger(this.value);
@@ -48,24 +40,15 @@
 			this.clearList();
 			var self = this;
 			var sorted = _.sortBy(list, function(option) {
-				return option.name;
+				return option.id;
 			});
 			_.each(sorted, function(option) {
-				self.add(option.id, option.name);
+				self.add(option.id, option.default_value);
 			});
 		},
 		clearList: function() {
 			this.$select.html('');
 			this.add(0, '');
-		},
-		clearAdder: function() {
-			this.$name.val('');
-		},
-		showAdder: function() {
-			this.$adder.show();
-		},
-		hideAdder: function() {
-			this.$adder.hide();
 		},
 		showDelete: function() {
 			this.$btnDelete.show();

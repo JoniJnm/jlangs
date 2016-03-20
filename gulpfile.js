@@ -1,5 +1,5 @@
 var gulp = require('gulp'),
-    rename = require('gulp-rename')
+	rename = require('gulp-rename'),
     less = require('gulp-less');
 
 gulp.task('compress', function() {

@@ -6,7 +6,8 @@
 			</div>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown export-btn hidden">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+					   aria-expanded="false">
 						Export <span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
@@ -14,7 +15,6 @@
 						<li><a class="export" data-type="json_var" href="javascript:void(0)">JSON var</a></li>
 						<li><a class="export" data-type="i18n" href="javascript:void(0)">i18n</a></li>
 						<li><a class="export" data-type="php_array" href="javascript:void(0)">PHP Array</a></li>
-						<li><a class="export" data-type="php_class" href="javascript:void(0)">PHP Class</a></li>
 						<!--<li><a class="export" data-type="mysql" href="javascript:void(0)">MySQL</a></li>-->
 						<li><a class="export" data-type="csv" href="javascript:void(0)">CSV</a></li>
 					</ul>

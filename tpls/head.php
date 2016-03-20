@@ -15,13 +15,13 @@
 	<script src="bower_components/jstemplate/dist/jstemplate.min.js"></script>
 
 	<script>
-	var app = {
-		models: {},
-		views: {}
-	};
+		var app = {
+			models: {},
+			views: {}
+		};
 	</script>
 
-	<?php foreach (glob(dirname(__DIR__).'/js/*.js') as $file) : ?>
+	<?php foreach (glob(dirname(__DIR__) . '/js/*.js') as $file) : ?>
 		<?php $file = basename($file); ?>
 		<script src="js/<?= $file ?>"></script>
 	<?php endforeach; ?>

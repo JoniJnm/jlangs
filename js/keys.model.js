@@ -4,30 +4,28 @@
 	'use strict';
 
 	var Model = function(texts) {
-		this.id_bundle = 0;
+		this.id_project = 0;
 		this.texts = texts;
 		this.view = new app.views.Keys();
 
-		this.view.onAdd.attach(this.add, this);
 		this.view.onChange.attach(this.onChange, this);
 		this.view.onDelete.attach(this.remove, this);
 	};
 
 	Model.prototype = {
-		refresh: function(id_bundle) {
-			this.id_bundle = id_bundle;
+		refresh: function(id_project) {
+			this.id_project = id_project;
 
 			var self = this;
 			$.ajax({
 				url: 'rest/key',
 				type: 'get',
 				data: {
-					id_bundle: id_bundle
+					id_project: id_project
 				},
 				success: function(list) {
 					self.texts.clear();
 					self.view.refreshList(list);
-					self.view.showAdder();
 				}
 			});
 		},
@@ -41,24 +39,8 @@
 				}
 			});
 		},
-		add: function(name) {
-			var self = this;
-			$.ajax({
-				url: 'rest/key',
-				type: 'post',
-				data: {
-					id_bundle: this.id_bundle,
-					name: name
-				},
-				success: function(id_key) {
-					self.view.add(id_key, name, true);
-					self.view.clearAdder();
-				}
-			});
-		},
 		clear: function() {
 			this.view.clearList();
-			this.view.hideAdder();
 			this.view.hideDelete();
 			this.texts.clear();
 		},

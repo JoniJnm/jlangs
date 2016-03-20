@@ -2,22 +2,24 @@
 
 namespace langs\controllers;
 
+use langs\classes\LangsExporter;
 use langs\models\LangModel;
 use langs\models\LangsModel;
-use langs\classes\LangsExporter;
 
-class ExportController extends BaseController {
+class ExportController extends BaseController
+{
 	/**
 	 * @var LangModel
 	 */
 	private $langModel;
-	
+
 	/**
 	 * @var LangsModel
 	 */
 	private $langsModel;
-	
-	public function __construct($route) {
+
+	public function __construct($route)
+	{
 		parent::__construct($route);
 		$this->langModel = LangModel::getInstance();
 		$this->langsModel = LangsModel::getInstance();
@@ -25,84 +27,81 @@ class ExportController extends BaseController {
 			->get('/json')
 			->get('/json_var')
 			->get('/php_array')
-			->get('/php_class')
 			//->get('/mysql')
 			->get('/csv')
 			->get('/i18n');
 	}
-	
+
 	/**
 	 * @return LangsExporter
 	 */
-	private function getExporter() {
+	private function getExporter()
+	{
 		$id_project = $this->request->getUInt('id_project');
 		$langs = $this->langModel->getByIdProject($id_project);
 		return new LangsExporter($id_project, $langs);
 	}
-	
-	public function json() {
+
+	public function json()
+	{
 		$exporter = $this->getExporter();
 		$zipPath = $exporter->toJSON();
-		
+
 		$this->endZip($zipPath, 'langs.zip');
 	}
-	
-	public function json_var() {
+
+	public function json_var()
+	{
 		$varname = 'lang';
 		if (!$this->request->is_empty("varname")) {
 			$varname = $this->request->getCmd('varname');
 		}
 		$exporter = $this->getExporter();
 		$zipPath = $exporter->toJSONVar($varname);
-		
+
 		$this->endZip($zipPath, 'langs.zip');
 	}
-	
-	public function php_array() {
+
+	public function php_array()
+	{
 		$exporter = $this->getExporter();
 		$zipPath = $exporter->toPHPArray();
-		
+
 		$this->endZip($zipPath, 'langs.zip');
 	}
-	
-	public function php_class() {
-		$namespace = null;
-		if (!$this->request->is_empty("namespace")) {
-			$namespace = $this->request->getRegex("[a-z0-9\\\\]+", "namespace");
-		}
-		$exporter = $this->getExporter();
-		$zipPath = $exporter->toPHPClass($namespace);
-		
-		$this->endZip($zipPath, 'langs.zip');
-	}
-	
-	public function mysql() {
+
+	public function mysql()
+	{
 		$exporter = $this->getExporter();
 		$filePath = $exporter->toMySQL();
-		
+
 		$this->end($filePath, 'langs.sql', 'text/sql');
 	}
-	
-	public function csv() {
+
+	public function csv()
+	{
 		$exporter = $this->getExporter();
 		$filePath = $exporter->toCSV();
 		$this->end($filePath, 'langs.csv', 'text/csv');
 	}
-	
-	public function i18n() {
+
+	public function i18n()
+	{
 		$exporter = $this->getExporter();
 		$zipPath = $exporter->toi18n();
 		$this->endZip($zipPath, 'langs.zip');
 	}
-	
-	private function endZip($filePath, $fileName) {
+
+	private function endZip($filePath, $fileName)
+	{
 		$this->end($filePath, $fileName, 'application/zip');
 	}
-	
-	private function end($filePath, $fileName, $contentType) {
+
+	private function end($filePath, $fileName, $contentType)
+	{
 		header('Content-Description: File Transfer');
-		header('Content-Type: '.$contentType);
-		header('Content-Disposition: attachment; filename="'.$fileName.'"');
+		header('Content-Type: ' . $contentType);
+		header('Content-Disposition: attachment; filename="' . $fileName . '"');
 		header('Expires: 0');
 		header('Cache-Control: must-revalidate');
 		header('Pragma: public');

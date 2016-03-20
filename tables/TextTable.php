@@ -2,18 +2,22 @@
 
 namespace langs\tables;
 
+use JNMFW\TableBase;
 use langs\Config;
 
-class TextTable extends \JNMFW\TableBase {
+class TextTable extends TableBase
+{
 	public $id_lang;
 	public $id_key;
 	public $value;
-	
-	public function getPrimaryKey() {
+
+	public function getPrimaryKey()
+	{
 		return null;
 	}
 
-	public function getTableName() {
+	public function getTableName()
+	{
 		return Config::TABLE_KEYS;
 	}
 }

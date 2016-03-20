@@ -3,39 +3,30 @@
 namespace langs\controllers;
 
 use langs\models\KeyModel;
-use langs\tables\KeyTable;
 
-class KeyController extends BaseController {
+class KeyController extends BaseController
+{
 	/**
 	 * @var KeyModel
 	 */
 	private $keyModel;
-	
-	public function __construct($route) {
+
+	public function __construct($route)
+	{
 		parent::__construct($route);
 		$this->keyModel = KeyModel::getInstance();
 		$this->addDefaultRoute();
 	}
-	
-	public function fetch() {
-		$id_bundle = $this->request->getUInt('id_bundle');
-		$data = $this->keyModel->getByIdBundle($id_bundle);
+
+	public function fetch()
+	{
+		$id_project = $this->request->getUInt('id_project');
+		$data = $this->keyModel->getByIdProject($id_project);
 		$this->server->sendData($data);
 	}
-	
-	public function create() {
-		$id_bundle = $this->request->getUInt('id_bundle');
-		$name = $this->request->getCmd('name');
-		
-		$item = new KeyTable();
-		$item->id_bundle = $id_bundle;
-		$item->name = $name;
-		$item->insert();
-		
-		$this->server->sendData($item->id);
-	}
-	
-	public function destroy() {
+
+	public function destroy()
+	{
 		$id_key = $this->request->getUInt('id');
 		$this->keyModel->delete($id_key);
 		$this->server->sendOK();
