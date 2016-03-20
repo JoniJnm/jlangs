@@ -4,14 +4,17 @@ namespace langs\controllers;
 
 use langs\classes\LangImporter;
 
-class ImportController extends BaseController {
-	public function __construct($route) {
+class ImportController extends BaseController
+{
+	public function __construct($route)
+	{
 		parent::__construct($route);
 		$this->route
 			->post('/hashes');
 	}
-	
-	private function isValidDic($dic) {
+
+	private function isValidDic($dic)
+	{
 		if (!$dic || !is_array($dic)) {
 			return false;
 		}
@@ -25,8 +28,9 @@ class ImportController extends BaseController {
 		}
 		return true;
 	}
-	
-	public function hashes() {
+
+	public function hashes()
+	{
 		$id_project = $this->request->getUInt('id_project');
 		$file = $this->request->getFile('dic');
 		$content = file_get_contents($file);

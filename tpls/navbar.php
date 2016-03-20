@@ -6,7 +6,8 @@
 			</div>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown export-btn hidden">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+					   aria-expanded="false">
 						Export <span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">

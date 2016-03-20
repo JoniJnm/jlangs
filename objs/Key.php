@@ -4,11 +4,13 @@ namespace langs\objs;
 
 use langs\tables\KeyTable;
 
-class Key extends \JNMFW\ObjBase {
+class Key extends \JNMFW\ObjBase
+{
 	/**
 	 * @return KeyTable
 	 */
-	public function getItem() {
+	public function getItem()
+	{
 		return $this->item;
 	}
 }

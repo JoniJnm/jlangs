@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
 
-	<?php require('tpls/head.php') ?>
+<?php require('tpls/head.php') ?>
 
-	<body role="document">
+<body role="document">
 
-		<?php require('tpls/navbar.php') ?>
+<?php require('tpls/navbar.php') ?>
 
-		<div class="container" role="main">
-			<?php require('tpls/top.php') ?>
-			
-			<?php require('tpls/langs.php') ?>
-		</div>
+<div class="container" role="main">
+	<?php require('tpls/top.php') ?>
 
-		<?php require('tpls/footer.php') ?>
-	</body>
+	<?php require('tpls/langs.php') ?>
+</div>
+
+<?php require('tpls/footer.php') ?>
+</body>
 </html>

@@ -2,12 +2,15 @@
 
 namespace langs\controllers;
 
-class BaseController extends \JNMFW\ControllerBase {
-	public function __construct($route) {
+class BaseController extends \JNMFW\ControllerBase
+{
+	public function __construct($route)
+	{
 		parent::__construct($route);
 	}
 
-	public function addDefaultRoute() {
+	public function addDefaultRoute()
+	{
 		$this->route
 			->addDefaults()
 			->get('/', 'fetch')

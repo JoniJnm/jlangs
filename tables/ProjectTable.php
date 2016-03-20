@@ -4,15 +4,18 @@ namespace langs\tables;
 
 use langs\Config;
 
-class ProjectTable extends \JNMFW\TableBase {
+class ProjectTable extends \JNMFW\TableBase
+{
 	public $id;
 	public $name;
-	
-	public function getPrimaryKey() {
+
+	public function getPrimaryKey()
+	{
 		return 'id';
 	}
 
-	public function getTableName() {
+	public function getTableName()
+	{
 		return Config::TABLE_PROJECTS;
 	}
 }

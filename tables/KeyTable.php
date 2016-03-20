@@ -4,17 +4,20 @@ namespace langs\tables;
 
 use langs\Config;
 
-class KeyTable extends \JNMFW\TableBase {
+class KeyTable extends \JNMFW\TableBase
+{
 	public $id;
 	public $id_project;
 	public $hash;
 	public $default_value;
-	
-	public function getPrimaryKey() {
+
+	public function getPrimaryKey()
+	{
 		return 'id';
 	}
 
-	public function getTableName() {
+	public function getTableName()
+	{
 		return Config::TABLE_KEYS;
 	}
 }
