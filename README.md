@@ -22,9 +22,9 @@ Deploy web:
 
 Usage in projects:
 
-1. cd /path/to/project
-2. npm install --save-dev gulp jlangs-processor
-3. Create gulp file, example:
+* cd /path/to/project
+* npm install --save-dev gulp jlangs-processor
+* Create gulpfile.js, example:
 
 ```js
 var gulp = require('gulp');
@@ -48,11 +48,11 @@ gulp.task('langs', function(cb) {
 });
 ```
 
-4. In your files, you can code like:
+* In your files, you can code like:
 
 ```js
-var miStr = langs.translate('Hello!');
-console.alert(miStr);
+var myStr = langs.translate('Hello!');
+console.alert(myStr);
 ```
 
 ```html
@@ -61,10 +61,10 @@ console.alert(miStr);
 </div>
 ```
 
-5. Run gulp task
+* Run gulp task
 
 ```shell
 gulp langs
-```js
+```
 
-6. See files stored in output_folder
+* See files stored in output_folder
