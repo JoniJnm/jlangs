@@ -2,9 +2,10 @@
 
 namespace langs\objs;
 
+use JNMFW\ObjBase;
 use langs\tables\KeyTable;
 
-class Key extends \JNMFW\ObjBase
+class Key extends ObjBase
 {
 	/**
 	 * @return KeyTable

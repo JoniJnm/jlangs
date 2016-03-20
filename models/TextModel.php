@@ -9,6 +9,7 @@ use langs\tables\ValueTable;
 class TextModel extends BaseModel
 {
 	/**
+	 * @param $id
 	 * @return Value
 	 */
 	public function getByID($id)
@@ -17,7 +18,8 @@ class TextModel extends BaseModel
 	}
 
 	/**
-	 * @return Value[]
+	 * @param $ids
+	 * @return \langs\objs\Value[]
 	 */
 	public function getByIDs($ids)
 	{
@@ -25,7 +27,8 @@ class TextModel extends BaseModel
 	}
 
 	/**
-	 * @return ValueTable[]
+	 * @param $id_key
+	 * @return \langs\tables\ValueTable[]
 	 */
 	public function getByIdKey($id_key)
 	{

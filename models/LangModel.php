@@ -4,11 +4,11 @@ namespace langs\models;
 
 use langs\Config;
 use langs\objs\Lang;
-use langs\tables\LangTable;
 
 class LangModel extends BaseModel
 {
 	/**
+	 * @param $id
 	 * @return Lang
 	 */
 	public function getByID($id)
@@ -17,7 +17,8 @@ class LangModel extends BaseModel
 	}
 
 	/**
-	 * @return Lang[]
+	 * @param $ids
+	 * @return \langs\objs\Lang[]
 	 */
 	public function getByIDs($ids)
 	{
@@ -25,7 +26,8 @@ class LangModel extends BaseModel
 	}
 
 	/**
-	 * @return LangTable[]
+	 * @param $id_project
+	 * @return \langs\tables\LangTable[]
 	 */
 	public function getByIdProject($id_project)
 	{

@@ -21,6 +21,7 @@ class LangsExporter
 	private $id_project;
 
 	/**
+	 * @param $id_project
 	 * @param LangTable[] $langs
 	 */
 	public function __construct($id_project, $langs)

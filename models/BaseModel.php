@@ -2,7 +2,9 @@
 
 namespace langs\models;
 
-abstract class BaseModel extends \JNMFW\ModelBase
+use JNMFW\ModelBase;
+
+abstract class BaseModel extends ModelBase
 {
 	protected function getObjByID($id, $name)
 	{

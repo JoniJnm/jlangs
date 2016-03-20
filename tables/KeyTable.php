@@ -2,9 +2,10 @@
 
 namespace langs\tables;
 
+use JNMFW\TableBase;
 use langs\Config;
 
-class KeyTable extends \JNMFW\TableBase
+class KeyTable extends TableBase
 {
 	public $id;
 	public $id_project;

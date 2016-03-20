@@ -2,7 +2,9 @@
 
 namespace langs\controllers;
 
-class BaseController extends \JNMFW\ControllerBase
+use JNMFW\ControllerBase;
+
+class BaseController extends ControllerBase
 {
 	public function __construct($route)
 	{

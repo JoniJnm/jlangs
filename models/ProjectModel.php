@@ -9,6 +9,7 @@ use langs\tables\ProjectTable;
 class ProjectModel extends BaseModel
 {
 	/**
+	 * @param $id
 	 * @return Project
 	 */
 	public function getByID($id)
@@ -17,7 +18,8 @@ class ProjectModel extends BaseModel
 	}
 
 	/**
-	 * @return Project[]
+	 * @param $ids
+	 * @return \langs\objs\Project[]
 	 */
 	public function getByIDs($ids)
 	{

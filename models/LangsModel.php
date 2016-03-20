@@ -2,9 +2,10 @@
 
 namespace langs\models;
 
+use JNMFW\ModelSimple;
 use langs\Config;
 
-class LangsModel extends \JNMFW\ModelSimple
+class LangsModel extends ModelSimple
 {
 	public function getTexts($id_lang)
 	{

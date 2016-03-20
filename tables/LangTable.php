@@ -2,9 +2,10 @@
 
 namespace langs\tables;
 
+use JNMFW\TableBase;
 use langs\Config;
 
-class LangTable extends \JNMFW\TableBase
+class LangTable extends TableBase
 {
 	public $id;
 	public $id_project;

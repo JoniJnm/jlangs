@@ -9,6 +9,7 @@ use langs\tables\KeyTable;
 class KeyModel extends BaseModel
 {
 	/**
+	 * @param $id
 	 * @return Key
 	 */
 	public function getByID($id)
@@ -17,7 +18,8 @@ class KeyModel extends BaseModel
 	}
 
 	/**
-	 * @return Key[]
+	 * @param $ids
+	 * @return \langs\objs\Key[]
 	 */
 	public function getByIDs($ids)
 	{
@@ -38,7 +40,8 @@ class KeyModel extends BaseModel
 	}
 
 	/**
-	 * @return KeyTable[]
+	 * @param $id_project
+	 * @return \langs\tables\KeyTable[]
 	 */
 	public function getByIdProject($id_project)
 	{
